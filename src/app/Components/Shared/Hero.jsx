@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa";
 import { LuPhone } from "react-icons/lu";
