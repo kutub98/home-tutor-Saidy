@@ -14,7 +14,7 @@ export default function NavBar() {
     setIsSheetOpen(false);
   };
   return (
-    <header className="flex sticky top-0 left-0 customWidth justify-between h-20 w-full shrink-0 items-center px-8 md:px-6   bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 shadow-md">
+    <header className="flex sticky z-[99] top-0 left-0 customWidth justify-between h-20 w-full shrink-0 items-center px-8 md:px-6   bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 shadow-md">
       <Sheet
         className="flex justify-between"
         open={isSheetOpen}
@@ -24,7 +24,7 @@ export default function NavBar() {
           {/* Show MountainIcon from md screens and up */}
           <MountainIcon className="h-6 w-6" />
         </Link>
-        <SheetContent side="left" className="h-svh overflow-y-scroll">
+        <SheetContent side="left" className="h-svh overflow-y-scroll z-[999]">
           <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
           <Link href="/" className=" h-[100px] " prefetch={false}>
             {/* Show MountainIcon from md screens and up */}

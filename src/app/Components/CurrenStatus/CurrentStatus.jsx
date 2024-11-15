@@ -7,10 +7,10 @@ import CountUp from "react-countup";
 
 const CurrentStatus = () => {
   return (
-    <div className="customWidth px-8 py-8 my-8">
+    <div className="customWidth px-8 py-8 my-8 -z-50">
       <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-3 md:grid-cols-3 lg:grid-cols-4">
         {/* Active Tutors */}
-        <HoverCard className="secondaryBg">
+        <HoverCard className="">
           <VscVmActive className="h-14 w-14" />
           <div>
             <h1 className="font-bold text-xl">
@@ -56,7 +56,7 @@ const CurrentStatus = () => {
 };
 
 const HoverCard = ({ children }) => (
-  <div className="relative secondaryBg flex space-x-3 py-4 items-center justify-center text-white rounded shadow overflow-hidden group">
+  <div className="relative secondaryBg  flex space-x-3 py-4 items-center justify-center text-white rounded shadow overflow-hidden group">
     {/* Hover effect */}
     <div className="absolute inset-0 bg-gradient-to-r from-[#405cfd] to-[#405cfd] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 ease-out"></div>
     {/* Content */}
