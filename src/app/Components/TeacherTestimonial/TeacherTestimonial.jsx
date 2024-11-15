@@ -9,7 +9,7 @@ import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import serviceImg from "@/Assets/bangla.jpg";
 
-const GuardianReview = () => {
+const TeacherTestimonial = () => {
   const testimonials = [
     {
       name: "লানা খান",
@@ -77,7 +77,7 @@ const GuardianReview = () => {
   ];
 
   return (
-    <div className="customWidth  py-10 overflow-hidden px-8 customServicBG">
+    <div className="customWidth  py-10 overflow-hidden px-8 my-20 customServicBG">
       <Carousel
         className="px-4"
         plugins={[
@@ -119,4 +119,4 @@ const GuardianReview = () => {
     </div>
   );
 };
-export default GuardianReview;
+export default TeacherTestimonial;
