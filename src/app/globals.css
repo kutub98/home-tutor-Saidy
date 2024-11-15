@@ -92,7 +92,6 @@ body {
 .customWidth {
   width: 100%;
   max-width: 1320px;
-  margin: auto;
 }
 
 .customHeroBG {
@@ -110,4 +109,8 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   padding: 10px 10px;
+}
+
+.clipPath {
+  clip-path: polygon(100% 10%, 100% 51%, 100% 100%, 0 100%, 0 10%, 49% 0);
 }
