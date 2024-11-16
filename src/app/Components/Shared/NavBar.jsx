@@ -14,7 +14,7 @@ export default function NavBar() {
     setIsSheetOpen(false);
   };
   return (
-    <header className="flex  justify-between h-20 w-full shrink-0 items-center px-8 md:px-6   bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 shadow-md">
+    <header className="flex  justify-between h-20 w-full shrink-0 items-center px-8 md:px-6   bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90 border border-gray-100 shadow-md">
       <Sheet
         className="flex justify-between"
         open={isSheetOpen}
