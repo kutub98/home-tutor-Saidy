@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./Components/Shared/NavBar";
 import Footer from "./Components/Shared/Footer";
-
+import ProgressBar from "@/app/Components/Shared/ProgressBar";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -30,7 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar />
+        {/* <NavBar /> */}
+        <div className="sticky customWidth mx-auto z-[999] top-0 ">
+          <ProgressBar />
+          <NavBar />
+        </div>
         {children}
         <Footer />
       </body>

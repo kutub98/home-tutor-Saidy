@@ -88,7 +88,7 @@ const GuardianReview = () => {
   ];
 
   return (
-    <div className="customWidth overflow-hidden py-10 overflow-hidden px-8 customServicBG">
+    <div className="customWidth mx-auto py-10 overflow-hidden px-8 customServicBG">
       <Carousel
         className="px-4"
         plugins={[

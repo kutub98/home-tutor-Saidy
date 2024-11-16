@@ -18,7 +18,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <div className="w-full overflow-hidden customHeroBG customWidth h-auto px-8">
+      <div className="w-full mx-auto overflow-hidden customHeroBG customWidth h-auto px-8">
         <div className="lg:flex lg:justify-between items-center block justify-center px-4  py-10">
           {/* tuition */}
           <motion.div

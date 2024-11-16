@@ -7,7 +7,7 @@ import CountUp from "react-countup";
 
 const CurrentStatus = () => {
   return (
-    <div className="customWidth px-8 py-8 my-8 -z-50">
+    <div className="customWidth mx-auto px-8 py-8 my-8 -z-50">
       <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-3 md:grid-cols-3 lg:grid-cols-4">
         {/* Active Tutors */}
         <HoverCard className="">

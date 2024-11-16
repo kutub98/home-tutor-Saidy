@@ -62,7 +62,7 @@ const Services = () => {
     }
   };
   return (
-    <div className="customWidth overflow-hidden py-20 my-20 overflow-hidden px-8 customServicBG">
+    <div className="customWidth mx-auto  py-20 my-20 overflow-hidden px-8 customServicBG">
       <Carousel
         className="px-4"
         plugins={[

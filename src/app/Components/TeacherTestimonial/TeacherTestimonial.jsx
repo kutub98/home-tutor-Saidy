@@ -88,7 +88,7 @@ const TeacherTestimonial = () => {
   ];
 
   return (
-    <div className="customWidth overflow-hidden py-10 overflow-hidden px-8 my-20 customServicBG">
+    <div className="customWidth mx-auto py-10 overflow-hidden px-8 my-20 customServicBG">
       <Carousel
         className="px-4"
         plugins={[
