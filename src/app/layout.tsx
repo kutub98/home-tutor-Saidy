@@ -32,8 +32,8 @@ export default function RootLayout({
       >
         {/* <NavBar /> */}
         <div className="sticky customWidth mx-auto z-[999] top-0 ">
-          <ProgressBar />
           <NavBar />
+          <ProgressBar />
         </div>
         {children}
         <Footer />
