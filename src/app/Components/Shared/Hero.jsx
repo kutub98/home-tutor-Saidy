@@ -1,15 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa";
 import { LuPhone } from "react-icons/lu";
-
+import { motion } from "motion/react";
 import Link from "next/link";
 const HeroSection = () => {
+  const variants = {
+    hidden: (direction) => ({
+      x: direction === "left" ? "-100%" : "100%",
+      opacity: 0
+    }),
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.9 }
+    }
+  };
+
   return (
     <>
-      <div className="w-full customHeroBG customWidth h-auto px-8">
+      <div className="w-full overflow-hidden customHeroBG customWidth h-auto px-8">
         <div className="lg:flex lg:justify-between items-center block justify-center px-4  py-10">
           {/* tuition */}
-          <div className="md:text-left text-center py-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            custom="left"
+            viewport={{ once: false }}
+            variants={variants}
+            className="md:text-left text-center py-8"
+          >
             <h1 className="primaryText font-bold lg:text-3xl my-2 md:text-2xl text-xl">
               আপনি কি শিক্ষক/শিক্ষিকা খুঁজছেন?
             </h1>
@@ -27,11 +46,18 @@ const HeroSection = () => {
                 ফোন
               </Button>
             </div>
-          </div>
+          </motion.div>
           {/* PARTITION  */}
           <div className="w-2 h-72 secondaryBg hidden lg:flex"></div>
           {/* teacher */}
-          <div className="md:text-end text-center py-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            custom="right"
+            viewport={{ once: false }}
+            variants={variants}
+            className="md:text-end text-center py-8"
+          >
             <h1 className="primaryText font-bold lg:text-3xl my-2 md:text-2xl text-xl">
               আপনি কি টিউশন খুঁজছেন?
             </h1>
@@ -49,7 +75,7 @@ const HeroSection = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

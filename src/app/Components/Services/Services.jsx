@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import serviceImg from "@/Assets/bangla.jpg";
+import { motion } from "motion/react";
 
 const Services = () => {
   const serviceName = [
@@ -48,8 +49,20 @@ const Services = () => {
       image: serviceImg
     }
   ];
+
+  const variants = {
+    hidden: (direction) => ({
+      x: direction === "left" ? "-100%" : "100%",
+      opacity: 0
+    }),
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.9 }
+    }
+  };
   return (
-    <div className="customWidth py-20 my-20 overflow-hidden px-8 customServicBG">
+    <div className="customWidth overflow-hidden py-20 my-20 overflow-hidden px-8 customServicBG">
       <Carousel
         className="px-4"
         plugins={[
@@ -60,11 +73,17 @@ const Services = () => {
           })
         ]}
       >
-        <div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          custom="right"
+          viewport={{ once: false }}
+          variants={variants}
+        >
           <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl font-semibold lg:my-6 my-4 text-center">
             বিভাগ পরিবেশন
           </h1>
-        </div>
+        </motion.div>
         <CarouselContent className="-ml-4">
           {serviceName.map((item, key) => (
             <CarouselItem

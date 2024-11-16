@@ -8,8 +8,19 @@ import * as React from "react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import serviceImg from "@/Assets/bangla.jpg";
-
+import { motion } from "motion/react";
 const TeacherTestimonial = () => {
+  const variants = {
+    hidden: (direction) => ({
+      x: direction === "left" ? "-100%" : "100%",
+      opacity: 0
+    }),
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.9 }
+    }
+  };
   const testimonials = [
     {
       name: "লানা খান",
@@ -77,7 +88,7 @@ const TeacherTestimonial = () => {
   ];
 
   return (
-    <div className="customWidth  py-10 overflow-hidden px-8 my-20 customServicBG">
+    <div className="customWidth overflow-hidden py-10 overflow-hidden px-8 my-20 customServicBG">
       <Carousel
         className="px-4"
         plugins={[
@@ -88,11 +99,17 @@ const TeacherTestimonial = () => {
           })
         ]}
       >
-        <div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          custom="left"
+          viewport={{ once: false }}
+          variants={variants}
+        >
           <h1 className="lg:text-4xl md:text-3xl sm:text-2xl text-xl font-semibold lg:my-6 my-4 text-center">
             কিছু অসাধারণ অভিভাবক/শিক্ষার্থী আমাদের সম্পর্কে কী বলে
           </h1>
-        </div>
+        </motion.div>
         <CarouselContent className="-ml-4">
           {testimonials.map((item, key) => (
             <CarouselItem key={key} className="items-center justify-center ">
