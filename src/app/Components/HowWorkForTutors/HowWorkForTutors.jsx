@@ -66,17 +66,17 @@ const HowWorkForTutors = () => {
       {/* large device  */}
       <div className="hidden lg:flex w-full max-w-5xl items-start mx-auto justify-between">
         {/* Left Section */}
-        <div className="hidden lg:flex flex-col gap-8 w-1/3">
+        <div className="hidden lg:flex flex-col gap-20 my-auto items-center justify-center ">
           {steps
             .filter((step) => step.side === "left")
             .map((step, idx) => (
               <div
                 key={idx}
-                className={`workflow-step w-full flex flex-col gap-8 bg-white shadow-md p-4 rounded ${
+                className={`workflow-step w-full flex flex-col gap-8 bg-white shadow-md p-2 rounded ${
                   activeStep === idx + 1 ? "border-2 border-blue-500" : ""
                 }`}
               >
-                <div className="flex gap-3 items-center">
+                <div className="flex gap-3 items-center w-full">
                   <h1
                     className={`h-8 w-8 flex justify-center items-center text-white text-center rounded-full ${
                       activeStep === idx + 1 ? "bg-blue-500" : "bg-gray-300"
