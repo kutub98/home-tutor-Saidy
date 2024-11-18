@@ -1,13 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker } from "@/lib/datePicker";
 import { SelectField } from "@/lib/Selection";
 import {
-  City,
   Locations,
   Gender,
-  Country,
   TuitionCategories,
   Class,
   TuitionType,
@@ -17,6 +15,25 @@ import { Label } from "@/components/ui/label";
 
 const JobBoard = () => {
   const [openFilters, setOpenFiler] = useState(false);
+  const [allJobs, setAllJobs] = useState(null);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      let res = await fetch("/jobs.json");
+      let data = await res.json();
+      setAllJobs(data);
+    }
+    fetchPosts();
+  }, []);
+
+  console.log(allJobs, "All Jobs");
+
+  // if (!allJobs) return <div>Loading...</div>;
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("Hello");
+  };
   return (
     <div className="customWidth px-8 py-8 mx-auto ">
       <div className="sticky z-50 top-24 w-full left-0 flex py-2 rounded-md items-center justify-between secondaryBg shadow-md px-4">
@@ -48,6 +65,7 @@ const JobBoard = () => {
       <div className="customWidth overflow-hidden">
         {openFilters && (
           <form
+            onSubmit={handleSubmitForm}
             className={`overflow-hidden transform transition-transform mx-auto origin-left duration-500 ease-in-out ${
               openFilters ? "translate-x-0" : "translate-x-full"
             }`}
@@ -64,21 +82,18 @@ const JobBoard = () => {
                   <div className="col-span-1 p-2 sm:col-span-2  bg-white shadow-md ">
                     <DatePicker name={"Posted Date To"} />
                   </div>
-                  {/* select Counter */}
-                  {/* <div className="col-span-1 p-2 sm:col-span-2  bg-white shadow-md ">
-                <SelectField options={Country} name="Select Country" />
-              </div>
-              <div className="col-span-1 p-2 sm:col-span-2  bg-white shadow-md ">
-                <SelectField options={City} name="Select City" />
-              </div> */}
+
                   <div className="col-span-1 p-2 md:col-span-4  bg-white shadow-md ">
                     <Label className="my-2 px-3"> Tuition Categories</Label>
-                    <SelectField options={TuitionCategories} name="Category" />
+                    <SelectField
+                      options={TuitionCategories}
+                      name="Select Category"
+                    />
                   </div>
 
                   <div className="col-span-1 p-2 md:col-span-4 bg-white shadow-md ">
                     <Label className="my-2 px-3"> Student Gender</Label>
-                    <SelectField options={Gender} name="Gender" />
+                    <SelectField options={Gender} name=" Student Gender" />
                   </div>
                 </div>
               </div>
@@ -88,7 +103,10 @@ const JobBoard = () => {
                   {/* 1/2 inputs */}
                   <div className="col-span-1 p-2 md:col-span-2 bg-white shadow-md ">
                     <Label className="my-2 px-3"> Tuition Type</Label>
-                    <SelectField options={TuitionType} name="Select Country" />
+                    <SelectField
+                      options={TuitionType}
+                      name="Select Select Tuition Type"
+                    />
                   </div>
                   <div className="col-span-1 p-2 md:col-span-2 bg-white shadow-md ">
                     <Label className="my-2 px-3">
@@ -97,20 +115,20 @@ const JobBoard = () => {
                     </Label>
                     <SelectField
                       options={TutoringPerDaysInWeek}
-                      name="Select Country"
+                      name="Select Per days"
                     />
                   </div>
                   <div className="col-span-1 p-2 md:col-span-4 bg-white shadow-md ">
                     <Label className="my-2 px-3"> Locations</Label>
-                    <SelectField options={Locations} name="Select Country" />
+                    <SelectField options={Locations} name="Select Location" />
                   </div>
                   <div className="col-span-1 p-2 md:col-span-4 bg-white shadow-md ">
                     <Label className="my-2 px-3"> Class</Label>
-                    <SelectField options={Class} name="Select Country" />
+                    <SelectField options={Class} name="Select Class" />
                   </div>
                   <div className="col-span-1 p-2 md:col-span-4 bg-white shadow-md ">
                     <Label className="my-2 px-3"> Tutor Gender</Label>
-                    <SelectField options={Gender} name="Select Country" />
+                    <SelectField options={Gender} name="Select Gender" />
                   </div>
                 </div>
               </div>
