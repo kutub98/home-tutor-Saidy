@@ -71,7 +71,11 @@ const JobBoard = () => {
         </Button>
       </div>
       {/* //form  */}
-      <div className="customWidth overflow-hidden">
+      <div
+        className={`customWidth bg-white overflow-hidden overflow-y-scroll sticky z-99 top-32 ${
+          openFilters && " h-svh"
+        }`}
+      >
         {openFilters && (
           <form
             onSubmit={handleSubmitForm}
@@ -205,7 +209,7 @@ const JobBoard = () => {
                     <Button className="primaryBg hover:bg-[#f39223] text-white font-medium">
                       Details
                     </Button>
-                    <Button className="primaryBorder bg-white  hover:bg-[#f39223] text-gray-500 font-medium">
+                    <Button className="primaryBorder bg-white  hover:bg-[#0059ff] text-gray-500 font-medium">
                       Apply
                     </Button>
                   </div>
