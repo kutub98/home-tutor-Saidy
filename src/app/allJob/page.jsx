@@ -3,6 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { DatePicker } from "@/lib/datePicker";
 import { SelectField } from "@/lib/Selection";
+import { VscTypeHierarchy } from "react-icons/vsc";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { IoLocationOutline } from "react-icons/io5";
+import { FaTransgender } from "react-icons/fa6";
+import { CgGenderMale } from "react-icons/cg";
+import { CgGenderFemale } from "react-icons/cg";
 import {
   Locations,
   Gender,
@@ -12,6 +18,7 @@ import {
   TutoringPerDaysInWeek
 } from "@/lib/Country";
 import { Label } from "@/components/ui/label";
+import { LuBook } from "react-icons/lu";
 
 const JobBoard = () => {
   const [openFilters, setOpenFiler] = useState(false);
@@ -146,11 +153,86 @@ const JobBoard = () => {
           </form>
         )}
       </div>
-      <div className="customWidth mx-auto">
-        {allJobs ? <div></div> : <Loading />}
+      <div className="customWidth mx-auto my-3">
+        {allJobs ? (
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-2">
+            {allJobs.map((des, key) => (
+              <div key={key} className="bg-gray-50  p-3 rounded shadow-lg">
+                <h1 className=" font-normal text-base my-2">{des.title}</h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                  {/* tuition type */}
+                  <div className="">
+                    <div className="flex space-x-1 items-center">
+                      <VscTypeHierarchy />
+                      <span>Tuition Type</span>
+                    </div>
+                    <h1 className="md:ml-5"> {des.tuitionType}</h1>
+                  </div>
+                  {/* salary */}
+                  <div className="">
+                    <div className="flex space-x-1 items-center">
+                      <FcMoneyTransfer /> <span>Salary</span>
+                    </div>
+                    <h1 className="md:ml-5"> {des.salary}</h1>
+                  </div>
+                  {/* subject */}
+                  <div className="">
+                    <div className="flex space-x-1 items-center">
+                      <LuBook /> <span>Subject</span>
+                    </div>
+                    <h1 className="md:ml-5"> {des.subjects}</h1>
+                  </div>
+                  {/* location  */}
+                  <div className="">
+                    <div className="flex space-x-1 items-center">
+                      <IoLocationOutline /> <span>Location</span>
+                    </div>
+                    <h1 className="md:ml-5"> {des.location}</h1>
+                  </div>
+                </div>
+                {/* preferredTutor tutor  */}
+                <div className="flex justify-between space-y-2 my-3">
+                  <div className="flex space-x-1">
+                    <h1 className="flex items-center">
+                      {des.preferredTutor === "Any" && <FaTransgender />}
+                      {des.preferredTutor === "Female" && <CgGenderFemale />}
+                      {des.preferredTutor === "Male" && <CgGenderMale />}
+                      <span className="ml-2">{des.preferredTutor}</span> Tutor
+                      preferred
+                    </h1>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button className="primaryBg hover:bg-[#f39223] text-white font-medium">
+                      Details
+                    </Button>
+                    <Button className="primaryBorder bg-white  hover:bg-[#f39223] text-gray-500 font-medium">
+                      Apply
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Loading />
+        )}
       </div>
     </div>
   );
 };
 
 export default JobBoard;
+
+// title;
+// jobId;
+// postedDate;
+// tuitionType;
+// studentGender;
+// preferredTutor;
+// tutoringTime;
+// tutoringDays;
+// noOfStudents;
+// salary;
+// subjects;
+// location;
+// otherRequirements;

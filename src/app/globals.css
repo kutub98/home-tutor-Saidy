@@ -87,7 +87,7 @@ body {
   background-color: #f39323;
 }
 .secondaryBorder {
-  border: 1px #f39323;
+  border: 1px solid #f39323;
 }
 .customWidth {
   width: 100%;
