@@ -28,7 +28,9 @@ const JobBoard = () => {
 
   console.log(allJobs, "All Jobs");
 
-  // if (!allJobs) return <div>Loading...</div>;
+  const Loading = () => {
+    if (!allJobs) return <div>Loading...</div>;
+  };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -143,6 +145,9 @@ const JobBoard = () => {
             </div>
           </form>
         )}
+      </div>
+      <div className="customWidth mx-auto">
+        {allJobs ? <div></div> : <Loading />}
       </div>
     </div>
   );
