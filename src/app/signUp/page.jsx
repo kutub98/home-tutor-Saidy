@@ -1,153 +1,211 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent
-} from "@/components/ui/card";
+"use client";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Locations } from "@/lib/Country";
+import { IoIosArrowForward } from "react-icons/io";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Link from "next/link";
 import Image from "next/image";
-import loginImg from "@/Assets/login.png";
+import { Checkbox } from "@/components/ui/checkbox";
+import signup from "@/Assets/signup.png";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 export default function SignUpPage() {
   return (
-    <div className="customWidth bg-[#f3922344] flex justify-center h-screen overflow-x-hidden overflow-y-scroll items-center">
-      <div className="w-full max-w-5xl px-8 mx-auto lg:flex  items-center justify-center ">
-        <div className="justify-center mx-auto items-center hidden ">
-          <Image
-            src={loginImg}
-            height="100%"
-            width="100%"
-            alt="loginPage"
-            className="shadow-lg"
-          />
+    <div className="customWidth mx-auto px-8 py-8">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="grid grid-cols-12 gap-4">
+          {/* Left side */}
+          <div className="md:col-span-5 md:block hidden bg-[#fffded]">
+            <div>
+              <Image
+                src={signup}
+                width={1000}
+                height={375}
+                alt="Signup Illustration"
+              />
+            </div>
+          </div>
+
+          {/* Right side */}
+          <form className="md:col-span-7 col-span-12 ">
+            <div className="w-full bg-white p-2 rounded-md shadow-lg">
+              <div className="grid grid-cols-12 gap-2 items-center">
+                {/* Full Name Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="fullName" className="my-2">
+                    Full Name
+                  </Label>
+                  <Input
+                    type="text"
+                    name="fullName"
+                    id="fullName"
+                    placeholder="Enter Full Name"
+                    required
+                    className="rounded px-2 py-1 border w-full"
+                  />
+                </div>
+
+                {/* Gender Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="Gender" className="my-2">
+                    Gender
+                  </Label>
+                  <RadioGroup className="flex my-3" defaultValue="">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Male" id="r2" />
+                      <Label htmlFor="r2">Male</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem className="" value="Female" id="r3" />
+                      <Label htmlFor="r3">Female</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Others" id="r3" />
+                      <Label htmlFor="r3">Others</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+                {/* Email Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="email" className="my-2">
+                    Email
+                  </Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Enter Email Address"
+                    required
+                    className="rounded px-2 py-1 border w-full"
+                  />
+                </div>
+                {/* Mobile Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="email" className="my-2">
+                    Mobile
+                  </Label>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Enter Your Number"
+                    required
+                    className="rounded px-2 py-1 border w-full"
+                  />
+                </div>
+                {/* City Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="city" className="my-2">
+                    City
+                  </Label>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a City" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {/* <SelectLabel>Fruits</SelectLabel> */}
+                        <SelectItem value="CHATTOGRAM">CHATTOGRAM</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {/* Location Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="Locations" className="my-2">
+                    Locations
+                  </Label>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a Locations" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {/* <SelectLabel>Fruits</SelectLabel> */}
+                        {Locations.map((value, key) => (
+                          <SelectItem key={key} value={value.value}>
+                            {value.value}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {/* Password Input */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="Locations" className="my-2">
+                    Locations
+                  </Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter Your password"
+                    required
+                    className="rounded px-2 py-1 border w-full"
+                  />
+                </div>
+                {/* Confirm Password */}
+                <div className="col-span-12 sm:col-span-6">
+                  <Label htmlFor="Locations" className="my-2">
+                    Confirm Password
+                  </Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter Your password"
+                    required
+                    className="rounded px-2 py-1 border w-full"
+                  />
+                </div>
+                {/* Agree to Terms */}
+                <div className="col-span-12 sm:col-span-6">
+                  {/* <Label htmlFor="Locations" className="my-2">
+                    Confirm Password
+                  </Label> */}
+                  <div className="flex space-x-2">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="terms" />
+                      <label
+                        htmlFor="terms"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        <span>
+                          I agree with
+                          <Link href={"/"} className="text-blue-400">
+                            Terms and privacy Policy
+                          </Link>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                {/* SignUp */}
+                <div className="col-span-12  items-center block sm:flex justify-between">
+                  <Button className="primaryBg flex text-white" type=" submit">
+                    Sign up
+                    <IoIosArrowForward className="ml-3" />
+                  </Button>
+                  <span>
+                    Already have an account ?
+                    <Link href={"/login"} className="text-blue-400">
+                      sign in
+                    </Link>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <Card className="mx-auto min-w-full  shadow-md">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold">Sign up</CardTitle>
-            <CardDescription>Sign up for for more update</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="FirstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  type="text"
-                  placeholder="last Name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="number">Number</Label>
-                <Input
-                  id="number"
-                  type="number"
-                  placeholder="number"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
-              </div>
-              <Button type="submit" className="w-full primaryBg">
-                Login
-              </Button>
-            </div>
-            <div className="flex text-center justify-center my-4">
-              {" "}
-              <h1>
-                {"Don't have account ?"}
-                <span>
-                  {" "}
-                  <Link href="/signUp" className="font-semibold text-blue-500">
-                    Signup
-                  </Link>{" "}
-                </span>
-              </h1>
-            </div>
-          </CardContent>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="FirstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  type="text"
-                  placeholder="last Name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="number">Number</Label>
-                <Input
-                  id="number"
-                  type="number"
-                  placeholder="number"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
-              </div>
-              <Button type="submit" className="w-full primaryBg">
-                Login
-              </Button>
-            </div>
-            <div className="flex text-center justify-center my-4">
-              {" "}
-              <h1>
-                {"Don't have account ?"}
-                <span>
-                  {" "}
-                  <Link href="/signUp" className="font-semibold text-blue-500">
-                    Signup
-                  </Link>{" "}
-                </span>
-              </h1>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

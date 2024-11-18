@@ -247,17 +247,3 @@ const JobBoard = () => {
 };
 
 export default JobBoard;
-
-// title;
-// jobId;
-// postedDate;
-// tuitionType;
-// studentGender;
-// preferredTutor;
-// tutoringTime;
-// tutoringDays;
-// noOfStudents;
-// salary;
-// subjects;
-// location;
-// otherRequirements;

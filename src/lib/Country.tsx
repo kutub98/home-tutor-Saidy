@@ -12,7 +12,6 @@ export const Locations = [
   { value: "New Market" },
   { value: "Reazuddin Bazar" },
   { value: "Sholashahar" },
-  { value: "Bahaddarhat" },
   { value: "Panchlaish" },
   { value: "Nasirabad" },
   { value: "Muradpur" },

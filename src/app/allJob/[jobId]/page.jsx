@@ -42,7 +42,7 @@ const JobDetails = () => {
           <h1 className=" font-bold text-base my-2">{job.title}</h1>
           <Link
             href="/allJob"
-            className="px-3 py-1 rounded flex space-x-2 bg-white hover:border-white items-center  text-gray-500 font-medium"
+            className="px-1 text-sm py-1 rounded flex space-x-2 bg-white hover:border-white items-center  text-gray-500 font-medium"
           >
             <IoChevronBackOutline />
             Back
