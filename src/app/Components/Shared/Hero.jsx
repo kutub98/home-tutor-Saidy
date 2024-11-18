@@ -37,14 +37,22 @@ const HeroSection = () => {
             </h1>
 
             <div className="flex space-x-2 md:justify-start justify-center">
-              <Button className="flex space-x-2 secondaryBg text-white hover:bg-[#106FB7]">
-                <FaWhatsapp />
+              <Link
+                href="https://wa.me/+8801847398047"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex space-x-2 px-3 py-1 rounded items-center secondaryBg text-white hover:bg-[#106FB7]"
+              >
+                <FaWhatsapp className="mr-1" />
                 ওয়াটসএপ
-              </Button>
-              <Button className="flex space-x-2 primaryBorder bg-white primaryText hover:bg-[#F39323] hover:text-white hover:border-none">
-                <LuPhone />
-                ফোন
-              </Button>
+              </Link>
+              <Link
+                className="primaryBorder bg-white px-3 py-1 items-center flex rounded hover:text-gray-800 hover:bg-[#ffffff] text-gray-500 font-medium"
+                href="tel:+8801847398047"
+              >
+                <LuPhone className="mr-1" />
+                যোগাযোগ
+              </Link>
             </div>
           </motion.div>
           {/* PARTITION  */}

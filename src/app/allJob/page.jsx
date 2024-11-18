@@ -9,6 +9,9 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaTransgender } from "react-icons/fa6";
 import { CgGenderMale } from "react-icons/cg";
 import { CgGenderFemale } from "react-icons/cg";
+import { Label } from "@/components/ui/label";
+import { LuBook } from "react-icons/lu";
+import Link from "next/link";
 import {
   Locations,
   Gender,
@@ -17,8 +20,6 @@ import {
   TuitionType,
   TutoringPerDaysInWeek
 } from "@/lib/Country";
-import { Label } from "@/components/ui/label";
-import { LuBook } from "react-icons/lu";
 
 const JobBoard = () => {
   const [openFilters, setOpenFiler] = useState(false);
@@ -45,7 +46,7 @@ const JobBoard = () => {
   };
   return (
     <div className="customWidth px-8 py-8 mx-auto ">
-      <div className="sticky z-50 top-24 w-full left-0 flex py-2 rounded-md items-center justify-between secondaryBg shadow-md px-4">
+      <div className="sticky z-50 top-20 w-full left-0 flex py-2 rounded-md items-center justify-between secondaryBg shadow-md px-4">
         <h1 className="font-semibold text-white">
           Total Jobs <span>10.00</span>
         </h1>
@@ -72,8 +73,8 @@ const JobBoard = () => {
       </div>
       {/* //form  */}
       <div
-        className={`customWidth bg-white overflow-hidden overflow-y-scroll sticky z-99 top-32 ${
-          openFilters && " h-svh"
+        className={`customWidth overflow-hidden overflow-y-scroll sticky  top-32 ${
+          openFilters && " max-h-screen"
         }`}
       >
         {openFilters && (
@@ -83,7 +84,7 @@ const JobBoard = () => {
               openFilters ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+            <div className="grid grid-cols-1 overflow-y-scroll bg-white md:grid-cols-2 gap-1">
               {/* Left side */}
               <div className="w-full bg-white p-2 space-y-1">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
@@ -145,13 +146,13 @@ const JobBoard = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full bg-white p-2 space-y-1">
-                <div className="flex space-x-2">
-                  <Button className="primaryBg text-white hover:bg-[#e6b356]">
-                    Submit
-                  </Button>
-                  <Button className="bg-red-600 text-white">RESET</Button>
-                </div>
+            </div>
+            <div className="w-full bg-white p-2 space-y-1">
+              <div className="flex block space-x-2">
+                <Button className="primaryBg text-white hover:bg-[#e6b356]">
+                  Submit
+                </Button>
+                <Button className="bg-red-600 text-white">RESET</Button>
               </div>
             </div>
           </form>
@@ -161,57 +162,77 @@ const JobBoard = () => {
         {allJobs ? (
           <div className="grid grid-cols-1 md:grid-cols-2  gap-2">
             {allJobs.map((des, key) => (
-              <div key={key} className="bg-gray-50  p-3 rounded shadow-lg">
-                <h1 className=" font-normal text-base my-2">{des.title}</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                  {/* tuition type */}
+              <div key={key}>
+                <div className="bg-gray-50 hover:bg-[#f8b7061c] p-3 rounded shadow-lg">
+                  <h1 className=" font-bold text-base my-2">{des.title}</h1>
                   <div className="">
-                    <div className="flex space-x-1 items-center">
-                      <VscTypeHierarchy />
-                      <span>Tuition Type</span>
+                    <div className="flex space-x-1 items-center my-2 text-gray-500">
+                      <h1 className="flex flex-row space-x-2">
+                        <span>Job Id: {des.jobId} </span>
+                        <span>||</span>
+                        <span> Posted Date: {des.postedDate}</span>
+                      </h1>
                     </div>
-                    <h1 className="md:ml-5"> {des.tuitionType}</h1>
                   </div>
-                  {/* salary */}
-                  <div className="">
-                    <div className="flex space-x-1 items-center">
-                      <FcMoneyTransfer /> <span>Salary</span>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                    {/* tuition type */}
+                    <div className="">
+                      <div className="flex space-x-1 items-center">
+                        <VscTypeHierarchy />
+                        <span>Tuition Type</span>
+                      </div>
+                      <h1 className="md:ml-5"> {des.tuitionType}</h1>
                     </div>
-                    <h1 className="md:ml-5"> {des.salary}</h1>
-                  </div>
-                  {/* subject */}
-                  <div className="">
-                    <div className="flex space-x-1 items-center">
-                      <LuBook /> <span>Subject</span>
+                    {/* salary */}
+                    <div className="">
+                      <div className="flex space-x-1 items-center">
+                        <FcMoneyTransfer /> <span>Salary</span>
+                      </div>
+                      <h1 className="md:ml-5"> {des.salary}</h1>
                     </div>
-                    <h1 className="md:ml-5"> {des.subjects}</h1>
-                  </div>
-                  {/* location  */}
-                  <div className="">
-                    <div className="flex space-x-1 items-center">
-                      <IoLocationOutline /> <span>Location</span>
+                    {/* subject */}
+                    <div className="">
+                      <div className="flex space-x-1 items-center">
+                        <LuBook /> <span>Subject</span>
+                      </div>
+                      <h1 className="md:ml-5"> {des.subjects}</h1>
                     </div>
-                    <h1 className="md:ml-5"> {des.location}</h1>
+                    {/* location  */}
+                    <div className="">
+                      <div className="flex space-x-1 items-center">
+                        <IoLocationOutline /> <span>Location</span>
+                      </div>
+                      <h1 className="md:ml-5"> {des.location}</h1>
+                    </div>
                   </div>
-                </div>
-                {/* preferredTutor tutor  */}
-                <div className="flex justify-between space-y-2 my-3">
-                  <div className="flex space-x-1">
-                    <h1 className="flex items-center">
-                      {des.preferredTutor === "Any" && <FaTransgender />}
-                      {des.preferredTutor === "Female" && <CgGenderFemale />}
-                      {des.preferredTutor === "Male" && <CgGenderMale />}
-                      <span className="ml-2">{des.preferredTutor}</span> Tutor
-                      preferred
-                    </h1>
-                  </div>
-                  <div className="flex space-x-2">
-                    <Button className="primaryBg hover:bg-[#f39223] text-white font-medium">
-                      Details
-                    </Button>
-                    <Button className="primaryBorder bg-white  hover:bg-[#0059ff] text-gray-500 font-medium">
-                      Apply
-                    </Button>
+                  {/* preferredTutor tutor  */}
+                  <div className="flex justify-between space-y-2 my-3">
+                    <div className="flex space-x-1">
+                      <h1 className="flex items-center">
+                        {des.preferredTutor === "Any" && <FaTransgender />}
+                        {des.preferredTutor === "Female" && <CgGenderFemale />}
+                        {des.preferredTutor === "Male" && <CgGenderMale />}
+                        <span className="ml-2">{des.preferredTutor}</span> Tutor
+                        preferred
+                      </h1>
+                    </div>
+                    <div className="flex space-x-2">
+                      <Link
+                        href={`/allJob/${des.jobId}`}
+                        className="primaryBg px-3 py-2 rounded hover:bg-[#f39223] text-white font-medium"
+                      >
+                        Details
+                      </Link>
+                      <Link
+                        className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
+                        href="https://wa.me/+8801847398047"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Apply
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
