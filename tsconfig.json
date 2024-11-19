@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/login/page.jsx",
+    "src/app/loginsssss/page.jsx",
     "src/app/Components/Shared/NavBar.jsx",
     "src/app/Components/HowWorkForTutors/HowWorkForTutors.jsx"
   ],
