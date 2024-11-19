@@ -167,10 +167,10 @@ const JobBoard = () => {
                   <h1 className=" font-bold text-base my-2">{des.title}</h1>
                   <div className="">
                     <div className="flex space-x-1 items-center my-2 text-gray-500">
-                      <h1 className="flex flex-row space-x-2">
-                        <span>Job Id: {des.jobId} </span>
-                        <span>||</span>
-                        <span> Posted Date: {des.postedDate}</span>
+                      <h1 className="flex flex-col sm:flex-row space-x-2">
+                        <span>Job Id: {des.jobId}</span>
+                        <span className="hidden sm:flex">||</span>
+                        <span>Posted Date: {des.postedDate}</span>
                       </h1>
                     </div>
                   </div>
@@ -207,7 +207,7 @@ const JobBoard = () => {
                     </div>
                   </div>
                   {/* preferredTutor tutor  */}
-                  <div className="flex justify-between space-y-2 my-3">
+                  <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
                     <div className="flex space-x-1">
                       <h1 className="flex items-center">
                         {des.preferredTutor === "Any" && <FaTransgender />}

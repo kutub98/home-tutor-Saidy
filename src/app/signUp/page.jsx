@@ -21,7 +21,7 @@ export default function SignUpPage() {
   return (
     <div className="customWidth mx-auto px-8 py-8">
       <div className="w-full max-w-6xl mx-auto">
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-4 lg:gap-16 items-center">
           {/* Left side */}
           <div className="md:col-span-5 md:block hidden bg-[#fffded]">
             <div>
@@ -35,8 +35,8 @@ export default function SignUpPage() {
           </div>
 
           {/* Right side */}
-          <form className="md:col-span-7 col-span-12 ">
-            <div className="w-full bg-white p-2 rounded-md shadow-lg">
+          <form className="md:col-span-7 col-span-12  items-center bg-white">
+            <div className="w-full bg-white rounded-md shadow-xl border p-4 overflow-hidden">
               <div className="grid grid-cols-12 gap-2 items-center">
                 {/* Full Name Input */}
                 <div className="col-span-12 sm:col-span-6">
@@ -168,10 +168,7 @@ export default function SignUpPage() {
                   />
                 </div>
                 {/* Agree to Terms */}
-                <div className="col-span-12 sm:col-span-6">
-                  {/* <Label htmlFor="Locations" className="my-2">
-                    Confirm Password
-                  </Label> */}
+                <div className="col-span-12 mt-3 sm:col-span-6">
                   <div className="flex space-x-2">
                     <div className="flex items-center space-x-2">
                       <Checkbox id="terms" />
@@ -190,12 +187,15 @@ export default function SignUpPage() {
                   </div>
                 </div>
                 {/* SignUp */}
-                <div className="col-span-12  items-center block sm:flex justify-between">
-                  <Button className="primaryBg flex text-white" type=" submit">
+                <div className="col-span-12 items-center block sm:flex justify-between">
+                  <Button
+                    className="primaryBg mt-3 mb-2 flex w-full sm:w-32  text-white"
+                    type=" submit"
+                  >
                     Sign up
                     <IoIosArrowForward className="ml-3" />
                   </Button>
-                  <span>
+                  <span className="mt-3 mb-2">
                     Already have an account ?
                     <Link href={"/login"} className="text-blue-400">
                       sign in
