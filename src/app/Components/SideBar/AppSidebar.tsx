@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Import usePathname hook
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 import Image from "next/image";
@@ -20,7 +21,24 @@ export function SideBar({
   openSideBar: boolean;
   setOpenSideBar: (value: boolean) => void;
 }) {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
+    typeof window !== "undefined" ? innerWidth < 900 : false
+  );
+
+  useEffect(() => {
+    const handleSize = () => {
+      setIsLargeScreen(window.innerWidth < 900);
+    };
+
+    window.addEventListener("resize", handleSize);
+    return () => window.removeEventListener("resize", handleSize);
+  }, []);
+  const handleClick = () => {
+    if (isLargeScreen) {
+      setOpenSideBar(!openSideBar);
+    }
+  };
 
   return (
     <div
@@ -48,6 +66,7 @@ export function SideBar({
           {items.map((item, key) => (
             <Link
               key={key}
+              onClick={handleClick}
               href={item.url}
               className={`flex items-center space-x-4 p-3 rounded-lg transition-colors hover:bg-gray-100 ${
                 pathname === item.url ? "bg-primary text-white" : ""
