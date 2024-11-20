@@ -55,7 +55,7 @@ const AddTuition = () => {
   };
 
   return (
-    <div className="relative w-full z-0">
+    <div className="relative w-full z-0 p-1">
       <div className="flex flex-wrap sticky top-16  items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
         <h1 className="text-lg font-semibold text-gray-800">
           Total Jobs:{" "}
@@ -143,7 +143,7 @@ const AddTuition = () => {
           allJobs.map((job, index) => (
             <div
               key={index}
-              className="bg-gray-50 p-4 rounded-lg shadow-md hover:shadow-lg transition"
+              className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition"
             >
               <h2 className="font-semibold text-lg mb-2">{job.title}</h2>
               <p className="text-sm text-gray-600">

@@ -14,7 +14,7 @@ export default function DashBoardLayout({
   const [openSideBar, setOpenSideBar] = useState(true);
 
   return (
-    <div className="flex h-screen z-99 bg-slate-100">
+    <div className="flex h-screen z-99 bg-slate-100 customWidth mx-auto">
       {/* Sidebar */}
       <div className="">
         <SideBar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />

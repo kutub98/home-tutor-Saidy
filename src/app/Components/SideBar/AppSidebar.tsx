@@ -2,36 +2,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Import usePathname hook
-import { Home, Inbox, Search, Settings } from "lucide-react";
+import { Home } from "lucide-react";
+import { FiUsers } from "react-icons/fi";
 
 import { IoAddCircleOutline } from "react-icons/io5";
 const items = [
   { title: "Home", url: "/admin", icon: Home },
-  { title: "Inbox", url: "/admin/login", icon: Inbox },
   { title: "Tuition", url: "/admin/addTuition", icon: IoAddCircleOutline },
-  { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
-  { title: "EVERYTHING OK", url: "/admin/settings", icon: Settings }
+  { title: "Users", url: "/admin/user", icon: FiUsers }
 ];
 
 export function SideBar({
