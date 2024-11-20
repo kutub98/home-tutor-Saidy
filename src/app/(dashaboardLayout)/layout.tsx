@@ -26,7 +26,7 @@ export default function DashBoardLayout({
           className="sticky  top-0 bg-white  flex justify-between p-2 items-center"
         >
           <Link href="/admin">
-            <Image src={logo} width={200} height={50} alt="Logo" />
+            <Image src={logo} width={60} height={50} alt="Logo" />
           </Link>
           <div className="flex flex-row">
             <h1 className="mx-1 cursor-pointer">new user</h1>
