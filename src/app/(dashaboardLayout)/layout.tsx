@@ -14,20 +14,24 @@ export default function DashBoardLayout({
   const [openSideBar, setOpenSideBar] = useState(true);
 
   return (
-    <div className="flex h-screen bg-slate-100">
+    <div className="flex h-screen z-99 bg-slate-100">
       {/* Sidebar */}
-      <div>
+      <div className="">
         <SideBar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />
       </div>
 
       {/* Main Content */}
-      <div className=" flex-1 overflow-auto bg-bla ">
+      <div className=" flex-1  overflow-auto bg-bla ">
         <div
           onClick={() => setOpenSideBar(!openSideBar)}
-          className="sticky  top-0 bg-white  flex justify-between p-2 items-center"
+          className="sticky  top-0 z-[989]  bg-white  flex justify-between p-2 items-center"
         >
           <Link href="/admin">
-            <Image src={logo} width={120} height={60} alt="Logo" />
+            <Image
+              src={logo}
+              className="lg:w-44 w-24 sm:w-32 lg:h-16 h-10"
+              alt="Logo"
+            />
           </Link>
           <div className="flex flex-row">
             <h1 className="mx-1 cursor-pointer">new user</h1>
@@ -39,7 +43,9 @@ export default function DashBoardLayout({
             />
           </div>
         </div>
-        <div className={` ${openSideBar ? "ml-72" : "m0"}`}>{children}</div>
+        <div className={`z-[999] ${openSideBar ? "ml-72" : "m0"}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

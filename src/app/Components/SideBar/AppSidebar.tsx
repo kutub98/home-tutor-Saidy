@@ -11,7 +11,28 @@ const items = [
   { title: "Inbox", url: "/admin/login", icon: Inbox },
   { title: "Tuition", url: "/admin/addTuition", icon: IoAddCircleOutline },
   { title: "Search", url: "/admin/search", icon: Search },
-  { title: "Settings", url: "/admin/settings", icon: Settings }
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Search", url: "/admin/search", icon: Search },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Search", url: "/admin/search", icon: Search },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Search", url: "/admin/search", icon: Search },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Search", url: "/admin/search", icon: Search },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "EVERYTHING OK", url: "/admin/settings", icon: Settings }
 ];
 
 export function SideBar({
@@ -54,15 +75,8 @@ export function SideBar({
       )}
 
       <div className="w-72 p-4 h-full flex flex-col">
-        {/* Logo */}
-        <div className="mb-6">
-          <Link href="/admin">
-            <Image src={logo} width={200} height={50} alt="Logo" />
-          </Link>
-        </div>
-
         {/* Navigation Items */}
-        <nav className="flex-1 overflow-y-auto">
+        <nav className="flex-1 overflow-y-auto pt-16 pb-10">
           {items.map((item, key) => (
             <Link
               key={key}

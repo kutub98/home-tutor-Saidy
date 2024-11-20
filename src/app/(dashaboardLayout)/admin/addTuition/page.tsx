@@ -1,87 +1,216 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { FcMoneyTransfer } from "react-icons/fc";
+import { IoLocationOutline } from "react-icons/io5";
+import { FaTransgender } from "react-icons/fa6";
+import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
+import { VscTypeHierarchy } from "react-icons/vsc";
+import { LuBook } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SelectField } from "@/lib/Selection";
+import {
+  Locations,
+  Gender,
+  TuitionCategories,
+  Class,
+  TuitionType,
+  TutoringPerDaysInWeek
+} from "@/lib/Country";
+import Link from "next/link";
+
 const AddTuition = () => {
+  const [allJobs, setAllJobs] = useState(null);
+  const [openJob, setOpenJob] = useState(false);
+
+  // Fetch jobs on component mount
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("/jobs.json");
+        const data = await res.json();
+        setAllJobs(data);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  // Loading component
+  const Loading = () => (
+    <div className="flex justify-center items-center py-4">
+      <span>Loading jobs...</span>
+    </div>
+  );
+
+  // Filter submission handler
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("Job submitted!");
+  };
+
   return (
-    <Dialog>
-      <div>
-        <div className="flex flex-wrap items-center justify-between bg-white p-4 shadow my-2 gap-4">
-          {/* Total Jobs */}
-          <h1 className="lg:text-lg font-semibold text-gray-800">
-            Total Jobs: <span className="text-primary font-bold">{100}</span>
-          </h1>
+    <div className="relative w-full z-0">
+      <div className="flex flex-wrap sticky top-16  items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
+        <h1 className="text-lg font-semibold text-gray-800">
+          Total Jobs:{" "}
+          <span className="text-primary font-bold">{allJobs?.length || 0}</span>
+        </h1>
 
-          {/* Search Bar */}
-          <div className="relative flex-1 max-w-xs">
-            <Input
-              type="search"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Search jobs..."
-              aria-label="Search jobs"
-            />
-            <CiSearch
-              className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
-              size={20}
-            />
-          </div>
-
-          {/* Add Job Button */}
-          <DialogTrigger asChild>
-            <Button
-              className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
-              variant="outline"
-            >
-              Edit Profile
-            </Button>
-          </DialogTrigger>
+        <div className="relative flex-1 max-w-xs">
+          <Input
+            type="search"
+            className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Search jobs..."
+            aria-label="Search jobs"
+          />
+          <CiSearch
+            className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
+            size={20}
+          />
         </div>
 
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when {"you're"}
-              done.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input
-                id="name"
-                defaultValue="Pedro Duarte"
-                className="col-span-3"
+        <Button
+          onClick={() => setOpenJob(!openJob)}
+          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
+        >
+          {openJob ? "Close Job" : "Add Jobs"}
+        </Button>
+      </div>
+
+      {/* Job Post Section */}
+      {openJob && (
+        <form
+          onSubmit={handleSubmitForm}
+          className="bg-white shadow-lg p-6 rounded-lg mb-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Left Job */}
+            <div>
+              <Label className="block mb-2">Tuition Categories</Label>
+              <SelectField options={TuitionCategories} name="category" />
+            </div>
+            <div>
+              <Label className="block mb-2">Student Gender</Label>
+              <SelectField options={Gender} name="studentGender" />
+            </div>
+
+            {/* Right Job */}
+            <div>
+              <Label className="block mb-2">Tuition Type</Label>
+              <SelectField options={TuitionType} name="tuitionType" />
+            </div>
+            <div>
+              <Label className="block mb-2">Tutoring Days/Week</Label>
+              <SelectField
+                options={TutoringPerDaysInWeek}
+                name="tutoringDays"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input
-                id="username"
-                defaultValue="@peduarte"
-                className="col-span-3"
-              />
+
+            <div>
+              <Label className="block mb-2">Location</Label>
+              <SelectField options={Locations} name="location" />
+            </div>
+            <div>
+              <Label className="block mb-2">Class</Label>
+              <SelectField options={Class} name="class" />
             </div>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
-        </DialogContent>
+
+          <div className="flex justify-end gap-4 mt-6">
+            <Button type="submit" className="bg-primary text-white">
+              Submit
+            </Button>
+            <Button
+              type="reset"
+              className="bg-red-600 text-white hover:bg-red-700"
+            >
+              Reset
+            </Button>
+          </div>
+        </form>
+      )}
+
+      {/* Job Listings */}
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
+        {allJobs ? (
+          allJobs.map((job, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 p-4 rounded-lg shadow-md hover:shadow-lg transition"
+            >
+              <h2 className="font-semibold text-lg mb-2">{job.title}</h2>
+              <p className="text-sm text-gray-600">
+                <strong>Job ID:</strong> {job.jobId} |{" "}
+                <strong>Posted Date:</strong> {job.postedDate}
+              </p>
+
+              <div className="mt-4 space-y-2">
+                <p className="flex items-center gap-2">
+                  <VscTypeHierarchy /> Tuition Type: {job.tuitionType}
+                </p>
+                <p className="flex items-center gap-2">
+                  <FcMoneyTransfer /> Salary: {job.salary}
+                </p>
+                <p className="flex items-center gap-2">
+                  <LuBook /> Subjects: {job.subjects}
+                </p>
+                <p className="flex items-center gap-2">
+                  <IoLocationOutline /> Location: {job.location}
+                </p>
+              </div>
+
+              <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
+                <div className="flex space-x-1">
+                  <h1 className="flex items-center">
+                    {job.preferredTutor === "Any" && <FaTransgender />}
+                    {job.preferredTutor === "Female" && <CgGenderFemale />}
+                    {job.preferredTutor === "Male" && <CgGenderMale />}
+                    <span className="ml-2">{job.preferredTutor}</span> Tutor
+                    preferred
+                  </h1>
+                </div>
+
+                <div className="flex space-x-2">
+                  <Button
+                    className={`${
+                      job.slot === "Available"
+                        ? "bg-green-500"
+                        : "bg-red-500 disabled:"
+                    }`}
+                  >
+                    {job.slot}
+                  </Button>
+                  <Link
+                    href={`/allJob/${job.jobId}`}
+                    className="primaryBg px-3 py-1 rounded hover:bg-[#f39223] text-white font-medium"
+                  >
+                    Details
+                  </Link>
+                  <Link
+                    className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
+                    href="https://wa.me/+8801847398047"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apply
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <Loading />
+        )}
       </div>
-    </Dialog>
+    </div>
   );
 };
+
 export default AddTuition;
