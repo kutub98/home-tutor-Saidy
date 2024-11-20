@@ -3,8 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Import usePathname hook
 import { Home, Inbox, Search, Settings } from "lucide-react";
-import Image from "next/image";
-import logo from "@/Assets/logo.png";
+
 import { IoAddCircleOutline } from "react-icons/io5";
 const items = [
   { title: "Home", url: "/admin", icon: Home },
