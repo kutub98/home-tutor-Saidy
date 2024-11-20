@@ -20,14 +20,6 @@ import {
   TuitionType,
   TutoringPerDaysInWeek
 } from "@/lib/Country";
-import {
-  Locations,
-  Gender,
-  TuitionCategories,
-  Class,
-  TuitionType,
-  TutoringPerDaysInWeek
-} from "@/lib/Country";
 
 const JobBoard = () => {
   const [openFilters, setOpenFiler] = useState(false);
