@@ -1,87 +1,64 @@
 "use client";
-import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import usePathname hook
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger
-} from "@radix-ui/react-dialog";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem
-} from "@/components/ui/sidebar";
+import Image from "next/image";
+import logo from "@/Assets/logo.png";
 
-// Menu items.
 const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: Home
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings
-  }
+  { title: "Home", url: "/admin", icon: Home },
+  { title: "Inbox", url: "/admin/login", icon: Inbox },
+  { title: "Calendar", url: "/admin/calendar", icon: Calendar },
+  { title: "Search", url: "/admin/search", icon: Search },
+  { title: "Settings", url: "/admin/settings", icon: Settings }
 ];
 
-export function AppSidebar() {
-  const [dialogOpen, setDialogOpen] = useState(false);
+export function SideBar({
+  openSideBar,
+  setOpenSideBar
+}: {
+  openSideBar: boolean;
+  setOpenSideBar: (value: boolean) => void;
+}) {
+  const pathname = usePathname(); // Get the current path
 
   return (
-    <Sidebar>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+    <div
+      className={`fixed h-full top-0 left-0 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+        openSideBar ? "translate-x-0" : "-translate-x-full"
+      } z-40`}
+    >
+      {!openSideBar && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-25 z-30"
+          onClick={() => setOpenSideBar(false)}
+        ></div>
+      )}
 
-      {/* Example Dialog Trigger */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogTrigger asChild>
-          <button>Open Modal</button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogTitle>Sidebar Modal</DialogTitle>
-          <p>This is a modal triggered from the sidebar.</p>
-        </DialogContent>
-      </Dialog>
-    </Sidebar>
+      <div className="w-72 p-4 h-full flex flex-col">
+        {/* Logo */}
+        <div className="mb-6">
+          <Link href="/admin">
+            <Image src={logo} width={200} height={50} alt="Logo" />
+          </Link>
+        </div>
+
+        {/* Navigation Items */}
+        <nav className="flex-1 overflow-y-auto">
+          {items.map((item, key) => (
+            <Link
+              key={key}
+              href={item.url}
+              className={`flex items-center space-x-4 p-3 rounded-lg transition-colors hover:bg-gray-100 ${
+                pathname === item.url ? "bg-primary text-white" : ""
+              }`}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.title}</span>
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </div>
   );
 }
