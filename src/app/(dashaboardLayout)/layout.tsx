@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/Assets/logo.png";
+
 export default function DashBoardLayout({
   children
 }: {
@@ -26,7 +27,7 @@ export default function DashBoardLayout({
           className="sticky  top-0 bg-white  flex justify-between p-2 items-center"
         >
           <Link href="/admin">
-            <Image src={logo} width={60} height={50} alt="Logo" />
+            <Image src={logo} width={120} height={60} alt="Logo" />
           </Link>
           <div className="flex flex-row">
             <h1 className="mx-1 cursor-pointer">new user</h1>
@@ -38,7 +39,7 @@ export default function DashBoardLayout({
             />
           </div>
         </div>
-        <div className={` p-6 ${openSideBar ? "ml-72" : "m0"}`}>{children}</div>
+        <div className={` ${openSideBar ? "ml-72" : "m0"}`}>{children}</div>
       </div>
     </div>
   );
