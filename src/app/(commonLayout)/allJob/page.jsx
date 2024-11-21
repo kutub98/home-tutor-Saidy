@@ -207,32 +207,87 @@ const JobBoard = () => {
                     </div>
                   </div>
                   {/* preferredTutor tutor  */}
-                  <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
-                    <div className="flex space-x-1">
-                      <h1 className="flex items-center">
-                        {des.preferredTutor === "Any" && <FaTransgender />}
-                        {des.preferredTutor === "Female" && <CgGenderFemale />}
-                        {des.preferredTutor === "Male" && <CgGenderMale />}
-                        <span className="ml-2">{des.preferredTutor}</span> Tutor
-                        preferred
-                      </h1>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Link
-                        href={`/allJob/${des.jobId}`}
-                        className="primaryBg px-3 py-2 rounded hover:bg-[#f39223] text-white font-medium"
-                      >
-                        Details
-                      </Link>
-                      <Link
-                        className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
-                        href="https://wa.me/+8801847398047"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Apply
-                      </Link>
-                    </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
+                    {allJobs ? (
+                      allJobs.map((job, index) => (
+                        <div
+                          key={index}
+                          className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition"
+                        >
+                          <h2 className="font-semibold text-lg mb-2">
+                            {job.title}
+                          </h2>
+                          <p className="text-sm text-gray-600">
+                            <strong>Job ID:</strong> {job.jobId} |{" "}
+                            <strong>Posted Date:</strong> {job.postedDate}
+                          </p>
+
+                          <div className="mt-4 space-y-2">
+                            <p className="flex items-center gap-2">
+                              <VscTypeHierarchy /> Tuition Type:{" "}
+                              {job.tuitionType}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <FcMoneyTransfer /> Salary: {job.salary}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <LuBook /> Subjects: {job.subjects}
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <IoLocationOutline /> Location: {job.location}
+                            </p>
+                          </div>
+
+                          <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
+                            <div className="flex space-x-1">
+                              <h1 className="flex items-center">
+                                {job.preferredTutor === "Any" && (
+                                  <FaTransgender />
+                                )}
+                                {job.preferredTutor === "Female" && (
+                                  <CgGenderFemale />
+                                )}
+                                {job.preferredTutor === "Male" && (
+                                  <CgGenderMale />
+                                )}
+                                <span className="ml-2">
+                                  {job.preferredTutor}
+                                </span>{" "}
+                                Tutor preferred
+                              </h1>
+                            </div>
+
+                            <div className="flex space-x-2">
+                              <Button
+                                className={`${
+                                  job.slot === "Available"
+                                    ? "bg-green-500"
+                                    : "bg-red-500 disabled:"
+                                }`}
+                              >
+                                {job.slot}
+                              </Button>
+                              <Link
+                                href={`/allJob/${job.jobId}`}
+                                className="primaryBg px-3 py-1 rounded hover:bg-[#f39223] text-white font-medium"
+                              >
+                                Details
+                              </Link>
+                              <Link
+                                className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
+                                href="https://wa.me/+8801847398047"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                Apply
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <Loading />
+                    )}
                   </div>
                 </div>
               </div>
