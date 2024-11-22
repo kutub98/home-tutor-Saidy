@@ -30,7 +30,8 @@
     "src/app/loginsssss/page.jsx",
     "src/app/Components/Shared/NavBar.jsx",
     "src/app/Components/HowWorkForTutors/HowWorkForTutors.jsx",
-    "src/app/(dashaboardLayout)/admin/addTuition/page.jsx"
+    "src/app/(dashaboardLayout)/admin/addTuition/page.jsx",
+    "src/app/(dashaboardLayout)/admin/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

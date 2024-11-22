@@ -158,141 +158,64 @@ const JobBoard = () => {
           </form>
         )}
       </div>
-      <div className="customWidth mx-auto my-3">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
         {allJobs ? (
-          <div className="grid grid-cols-1 md:grid-cols-2  gap-2">
-            {allJobs.map((des, key) => (
-              <div key={key}>
-                <div className="bg-gray-50 hover:bg-[#f8b7061c] p-3 rounded shadow-lg">
-                  <h1 className=" font-bold text-base my-2">{des.title}</h1>
-                  <div className="">
-                    <div className="flex space-x-1 items-center my-2 text-gray-500">
-                      <h1 className="flex flex-col sm:flex-row space-x-2">
-                        <span>Job Id: {des.jobId}</span>
-                        <span className="hidden sm:flex">||</span>
-                        <span>Posted Date: {des.postedDate}</span>
-                      </h1>
-                    </div>
-                  </div>
+          allJobs.map((job, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 p-6 hover:bg-[#fffded] rounded-lg shadow-md hover:shadow-lg transition"
+            >
+              <h2 className="font-semibold text-lg mb-2">{job.title}</h2>
+              <p className="text-sm text-gray-600">
+                <strong>Job ID:</strong> {job.jobId} |{" "}
+                <strong>Posted Date:</strong> {job.postedDate}
+              </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                    {/* tuition type */}
-                    <div className="">
-                      <div className="flex space-x-1 items-center">
-                        <VscTypeHierarchy />
-                        <span>Tuition Type</span>
-                      </div>
-                      <h1 className="md:ml-5"> {des.tuitionType}</h1>
-                    </div>
-                    {/* salary */}
-                    <div className="">
-                      <div className="flex space-x-1 items-center">
-                        <FcMoneyTransfer /> <span>Salary</span>
-                      </div>
-                      <h1 className="md:ml-5"> {des.salary}</h1>
-                    </div>
-                    {/* subject */}
-                    <div className="">
-                      <div className="flex space-x-1 items-center">
-                        <LuBook /> <span>Subject</span>
-                      </div>
-                      <h1 className="md:ml-5"> {des.subjects}</h1>
-                    </div>
-                    {/* location  */}
-                    <div className="">
-                      <div className="flex space-x-1 items-center">
-                        <IoLocationOutline /> <span>Location</span>
-                      </div>
-                      <h1 className="md:ml-5"> {des.location}</h1>
-                    </div>
-                  </div>
-                  {/* preferredTutor tutor  */}
-                  <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-                    {allJobs ? (
-                      allJobs.map((job, index) => (
-                        <div
-                          key={index}
-                          className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition"
-                        >
-                          <h2 className="font-semibold text-lg mb-2">
-                            {job.title}
-                          </h2>
-                          <p className="text-sm text-gray-600">
-                            <strong>Job ID:</strong> {job.jobId} |{" "}
-                            <strong>Posted Date:</strong> {job.postedDate}
-                          </p>
+              <div className="mt-4 space-y-2">
+                <p className="flex items-center gap-2">
+                  <VscTypeHierarchy /> Tuition Type: {job.tuitionType}
+                </p>
+                <p className="flex items-center gap-2">
+                  <FcMoneyTransfer /> Salary: {job.salary}
+                </p>
+                <p className="flex items-center gap-2">
+                  <LuBook /> Subjects: {job.subjects}
+                </p>
+                <p className="flex items-center gap-2">
+                  <IoLocationOutline /> Location: {job.location}
+                </p>
+              </div>
 
-                          <div className="mt-4 space-y-2">
-                            <p className="flex items-center gap-2">
-                              <VscTypeHierarchy /> Tuition Type:{" "}
-                              {job.tuitionType}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <FcMoneyTransfer /> Salary: {job.salary}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <LuBook /> Subjects: {job.subjects}
-                            </p>
-                            <p className="flex items-center gap-2">
-                              <IoLocationOutline /> Location: {job.location}
-                            </p>
-                          </div>
+              <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
+                <div className="flex space-x-1">
+                  <h1 className="flex items-center">
+                    {job.preferredTutor === "Any" && <FaTransgender />}
+                    {job.preferredTutor === "Female" && <CgGenderFemale />}
+                    {job.preferredTutor === "Male" && <CgGenderMale />}
+                    <span className="ml-2">{job.preferredTutor}</span> Tutor
+                    preferred
+                  </h1>
+                </div>
 
-                          <div className="sm:flex sm:justify-between sm:items-center space-y-2 my-3 w-full ">
-                            <div className="flex space-x-1">
-                              <h1 className="flex items-center">
-                                {job.preferredTutor === "Any" && (
-                                  <FaTransgender />
-                                )}
-                                {job.preferredTutor === "Female" && (
-                                  <CgGenderFemale />
-                                )}
-                                {job.preferredTutor === "Male" && (
-                                  <CgGenderMale />
-                                )}
-                                <span className="ml-2">
-                                  {job.preferredTutor}
-                                </span>{" "}
-                                Tutor preferred
-                              </h1>
-                            </div>
-
-                            <div className="flex space-x-2">
-                              <Button
-                                className={`${
-                                  job.slot === "Available"
-                                    ? "bg-green-500"
-                                    : "bg-red-500 disabled:"
-                                }`}
-                              >
-                                {job.slot}
-                              </Button>
-                              <Link
-                                href={`/allJob/${job.jobId}`}
-                                className="primaryBg px-3 py-1 rounded hover:bg-[#f39223] text-white font-medium"
-                              >
-                                Details
-                              </Link>
-                              <Link
-                                className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
-                                href="https://wa.me/+8801847398047"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Apply
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <Loading />
-                    )}
-                  </div>
+                <div className="flex space-x-2">
+                  <Link
+                    href={`/allJob/${job.jobId}`}
+                    className="primaryBg px-3 py-1 rounded hover:bg-[#f39223] text-white font-medium"
+                  >
+                    Details
+                  </Link>
+                  <Link
+                    className="primaryBorder bg-white px-3 py-1 rounded hover:text-gray-800  hover:bg-[#ffffff] text-gray-500 font-medium"
+                    href="https://wa.me/+8801847398047"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apply
+                  </Link>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))
         ) : (
           <Loading />
         )}
