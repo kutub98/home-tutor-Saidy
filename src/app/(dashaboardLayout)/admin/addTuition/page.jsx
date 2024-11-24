@@ -26,7 +26,6 @@ const AddTuition = () => {
   const [allJobs, setAllJobs] = useState(null);
   const [openJob, setOpenJob] = useState(false);
 
-  // Fetch jobs on component mount
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -41,22 +40,20 @@ const AddTuition = () => {
     fetchJobs();
   }, []);
 
-  // Loading component
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("Job submitted!");
+  };
   const Loading = () => (
     <div className="flex justify-center items-center py-4">
       <span>Loading jobs...</span>
     </div>
   );
 
-  // Filter submission handler
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    console.log("Job submitted!");
-  };
-
   return (
-    <div className="relative w-full z-0 p-1">
-      <div className="flex flex-wrap sticky top-16  items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
+    <div className="w-full p-1">
+      {/* Top Section */}
+      <div className="flex flex-wrap sticky top-16 items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
         <h1 className="text-lg font-semibold text-gray-800">
           Total Jobs:{" "}
           <span className="text-primary font-bold">{allJobs?.length || 0}</span>
@@ -67,7 +64,6 @@ const AddTuition = () => {
             type="search"
             className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Search jobs..."
-            aria-label="Search jobs"
           />
           <CiSearch
             className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
@@ -83,58 +79,64 @@ const AddTuition = () => {
         </Button>
       </div>
 
-      {/* Job Post Section */}
+      {/* Modal */}
       {openJob && (
-        <form
-          onSubmit={handleSubmitForm}
-          className="bg-white shadow-lg p-6 rounded-lg mb-6"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Left Job */}
-            <div>
-              <Label className="block mb-2">Tuition Categories</Label>
-              <SelectField options={TuitionCategories} name="category" />
-            </div>
-            <div>
-              <Label className="block mb-2">Student Gender</Label>
-              <SelectField options={Gender} name="studentGender" />
-            </div>
-
-            {/* Right Job */}
-            <div>
-              <Label className="block mb-2">Tuition Type</Label>
-              <SelectField options={TuitionType} name="tuitionType" />
-            </div>
-            <div>
-              <Label className="block mb-2">Tutoring Days/Week</Label>
-              <SelectField
-                options={TutoringPerDaysInWeek}
-                name="tutoringDays"
-              />
-            </div>
-
-            <div>
-              <Label className="block mb-2">Location</Label>
-              <SelectField options={Locations} name="location" />
-            </div>
-            <div>
-              <Label className="block mb-2">Class</Label>
-              <SelectField options={Class} name="class" />
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-4 mt-6">
-            <Button type="submit" className="bg-primary text-white">
-              Submit
-            </Button>
-            <Button
-              type="reset"
-              className="bg-red-600 text-white hover:bg-red-700"
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-center items-center">
+          <div className="bg-white w-11/12 md:w-2/3 lg:w-1/2 p-6 rounded-lg shadow-lg overflow-y-auto max-h-[90vh] relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setOpenJob(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
             >
-              Reset
-            </Button>
+              ✕
+            </button>
+
+            <h2 className="text-lg font-bold text-center mb-4">Add New Job</h2>
+            <form onSubmit={handleSubmitForm}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label className="block mb-2">Tuition Categories</Label>
+                  <SelectField options={TuitionCategories} name="category" />
+                </div>
+                <div>
+                  <Label className="block mb-2">Student Gender</Label>
+                  <SelectField options={Gender} name="studentGender" />
+                </div>
+                <div>
+                  <Label className="block mb-2">Tuition Type</Label>
+                  <SelectField options={TuitionType} name="tuitionType" />
+                </div>
+                <div>
+                  <Label className="block mb-2">Tutoring Days/Week</Label>
+                  <SelectField
+                    options={TutoringPerDaysInWeek}
+                    name="tutoringDays"
+                  />
+                </div>
+                <div>
+                  <Label className="block mb-2">Location</Label>
+                  <SelectField options={Locations} name="location" />
+                </div>
+                <div>
+                  <Label className="block mb-2">Class</Label>
+                  <SelectField options={Class} name="class" />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-4 mt-6">
+                <Button type="submit" className="bg-primary text-white">
+                  Submit
+                </Button>
+                <Button
+                  type="reset"
+                  className="bg-red-600 text-white hover:bg-red-700"
+                >
+                  Reset
+                </Button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       )}
 
       {/* Job Listings */}

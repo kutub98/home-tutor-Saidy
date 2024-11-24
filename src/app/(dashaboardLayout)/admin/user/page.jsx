@@ -22,11 +22,12 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+
 const AllUser = () => {
   const [allUser, setAllUser] = useState(null);
   const [openJob, setOpenJob] = useState(false);
 
-  // Fetch User on component mount
+  // Fetch User data
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -37,37 +38,35 @@ const AllUser = () => {
         console.log("Error fetching User:", err);
       }
     };
-
     fetchUser();
   }, []);
 
-  // Loading component
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("User added!");
+  };
+
   const Loading = () => (
     <div className="flex justify-center items-center py-4">
       <span>Loading User...</span>
     </div>
   );
 
-  // Filter submission handler
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
-    console.log("Job submitted!");
-  };
-
   return (
-    <div className="relative w-full z-0 p-1">
-      <div className="flex flex-wrap sticky top-16  items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
+    <div className="relative w-full p-4">
+      {/* Header Section */}
+      <div className="flex flex-wrap sticky top-16 items-center justify-between bg-white p-4 shadow-lg rounded-lg mb-4 gap-4">
         <h1 className="text-lg font-semibold text-gray-800">
-          Total User:{" "}
+          Total Users:{" "}
           <span className="text-primary font-bold">{allUser?.length || 0}</span>
         </h1>
 
+        {/* Search Bar */}
         <div className="relative flex-1 max-w-xs">
           <Input
             type="search"
-            className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Search User..."
-            aria-label="Search User"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Search Users..."
           />
           <CiSearch
             className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
@@ -75,168 +74,187 @@ const AllUser = () => {
           />
         </div>
 
+        {/* Add User Button */}
         <Button
           onClick={() => setOpenJob(!openJob)}
           className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
         >
-          {openJob ? "Close Job" : "Add User"}
+          {openJob ? "Close User" : "Add User"}
         </Button>
       </div>
 
-      {/* Job Post Section */}
+      {/* Add User Modal */}
       {openJob && (
-        <form onSubmit={handleSubmitForm} className="">
-          <div className="w-full bg-white rounded-md shadow-xl border p-4 overflow-hidden">
-            <div className="grid grid-cols-12 gap-2 items-center">
-              {/* Full Name Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="fullName" className="my-2">
-                  Full Name
-                </Label>
-                <Input
-                  type="text"
-                  name="fullName"
-                  id="fullName"
-                  placeholder="Enter Full Name"
-                  required
-                  className="rounded px-2 py-1 border w-full"
-                />
-              </div>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-center items-center overflow-hidden"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div className="bg-white w-11/12 sm:w-3/4 lg:w-1/2 p-6 rounded-lg shadow-lg max-h-[90vh] overflow-y-auto relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setOpenJob(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 focus:outline-none"
+              aria-label="Close modal"
+            >
+              ✕
+            </button>
 
-              {/* Gender Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="Gender" className="my-2">
-                  Gender
-                </Label>
-                <RadioGroup className="flex my-3" defaultValue="">
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Male" id="r2" />
-                    <Label htmlFor="r2">Male</Label>
+            <h2 className="text-lg font-bold text-center mb-4">Add New User</h2>
+            <form onSubmit={handleSubmitForm} className="">
+              <div className="w-full bg-white rounded-md shadow-xl border p-4 overflow-hidden">
+                <div className="grid grid-cols-12 gap-2 items-center">
+                  {/* Full Name Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="fullName" className="my-2">
+                      Full Name
+                    </Label>
+                    <Input
+                      type="text"
+                      name="fullName"
+                      id="fullName"
+                      placeholder="Enter Full Name"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem className="" value="Female" id="r3" />
-                    <Label htmlFor="r3">Female</Label>
+
+                  {/* Gender Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Gender" className="my-2">
+                      Gender
+                    </Label>
+                    <RadioGroup className="flex my-3" defaultValue="">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="Male" id="r2" />
+                        <Label htmlFor="r2">Male</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem className="" value="Female" id="r3" />
+                        <Label htmlFor="r3">Female</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="Others" id="r3" />
+                        <Label htmlFor="r3">Others</Label>
+                      </div>
+                    </RadioGroup>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Others" id="r3" />
-                    <Label htmlFor="r3">Others</Label>
+                  {/* Email Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="email" className="my-2">
+                      Email
+                    </Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Enter Email Address"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
                   </div>
-                </RadioGroup>
-              </div>
-              {/* Email Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="email" className="my-2">
-                  Email
-                </Label>
-                <Input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Enter Email Address"
-                  required
-                  className="rounded px-2 py-1 border w-full"
-                />
-              </div>
-              {/* Mobile Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="email" className="my-2">
-                  Mobile
-                </Label>
-                <Input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Enter Your Number"
-                  required
-                  className="rounded px-2 py-1 border w-full"
-                />
-              </div>
-              {/* City Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="city" className="my-2">
-                  City
-                </Label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a City" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {/* <SelectLabel>Fruits</SelectLabel> */}
-                      <SelectItem value="CHATTOGRAM">CHATTOGRAM</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              {/* Location Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="Locations" className="my-2">
-                  Locations
-                </Label>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a Locations" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      {/* <SelectLabel>Fruits</SelectLabel> */}
-                      {Locations.map((value, key) => (
-                        <SelectItem key={key} value={value.value}>
-                          {value.value}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              {/* Password Input */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="Locations" className="my-2">
-                  Locations
-                </Label>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Enter Your password"
-                  required
-                  className="rounded px-2 py-1 border w-full"
-                />
-              </div>
-              {/* Confirm Password */}
-              <div className="col-span-12 sm:col-span-6">
-                <Label htmlFor="Locations" className="my-2">
-                  Confirm Password
-                </Label>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Enter Your password"
-                  required
-                  className="rounded px-2 py-1 border w-full"
-                />
-              </div>
-              {/* Agree to Terms */}
-              <div className="col-span-12 mt-3">
-                <div className="flex justify-end gap-4 mt-6">
-                  <Button type="submit" className="bg-primary text-white">
-                    Submit
-                  </Button>
-                  <Button
-                    type="reset"
-                    className="bg-red-600 text-white hover:bg-red-700"
-                  >
-                    Reset
-                  </Button>
+                  {/* Mobile Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="email" className="my-2">
+                      Mobile
+                    </Label>
+                    <Input
+                      type="text"
+                      name="email"
+                      id="email"
+                      placeholder="Enter Your Number"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
+                  </div>
+                  {/* City Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="city" className="my-2">
+                      City
+                    </Label>
+                    <Select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a City" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {/* <SelectLabel>Fruits</SelectLabel> */}
+                          <SelectItem value="CHATTOGRAM">CHATTOGRAM</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {/* Location Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Locations" className="my-2">
+                      Locations
+                    </Label>
+                    <Select>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a Locations" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {/* <SelectLabel>Fruits</SelectLabel> */}
+                          {Locations.map((value, key) => (
+                            <SelectItem key={key} value={value.value}>
+                              {value.value}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {/* Password Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Locations" className="my-2">
+                      Locations
+                    </Label>
+                    <Input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Enter Your password"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
+                  </div>
+                  {/* Confirm Password */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Locations" className="my-2">
+                      Confirm Password
+                    </Label>
+                    <Input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Enter Your password"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
+                  </div>
+                  {/* Agree to Terms */}
+                  <div className="col-span-12 mt-3">
+                    <div className="flex justify-end gap-4 mt-6">
+                      <Button type="submit" className="bg-primary text-white">
+                        Submit
+                      </Button>
+                      <Button
+                        type="reset"
+                        className="bg-red-600 text-white hover:bg-red-700"
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
-        </form>
+        </div>
       )}
 
-      {/* Job Listings */}
+      {/* User Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
         {allUser ? (
           allUser.map((job, index) => (

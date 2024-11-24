@@ -1,8 +1,29 @@
 "use client";
 import React from "react";
 import Chart from "chart.js";
+import { useState, useEffect } from "react";
+import { FaRegUser } from "react-icons/fa";
+import { FaBriefcase } from "react-icons/fa";
+import { MdEventAvailable } from "react-icons/md";
+import { TicketCheck } from "lucide-react";
 
 export default function AdminHomePage() {
+  const [allJobs, setAllJobs] = useState(null);
+
+  // Fetch jobs on component mount
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("/jobs.json");
+        const data = await res.json();
+        setAllJobs(data);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    };
+
+    fetchJobs();
+  }, []);
   React.useEffect(() => {
     let config = {
       type: "bar",
@@ -99,8 +120,51 @@ export default function AdminHomePage() {
     let ctx = document.getElementById("bar-chart").getContext("2d");
     window.myBar = new Chart(ctx, config);
   }, []);
+
+  const BookedJobs = allJobs?.filter((item) => item.slot === "Booked").length;
+  const AvailableJobs = allJobs?.filter(
+    (item) => item.slot === "Available"
+  ).length;
   return (
     <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-10">
+        {[
+          {
+            title: "Total Jobs",
+            count: allJobs?.length || 0,
+            icon: <FaBriefcase />
+          },
+          {
+            title: "Total Users",
+            count: allJobs?.length || 0,
+            icon: <FaRegUser />
+          },
+          {
+            title: "Booked Jobs",
+            count: BookedJobs,
+            icon: <TicketCheck className="w-12 h-12" />
+          },
+          {
+            title: "Available Jobs",
+            count: AvailableJobs,
+            icon: <MdEventAvailable />
+          }
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="bg-white shadow rounded-md p-6 flex flex-col items-start justify-between h-auto relative group hover:shadow-lg transition-shadow"
+          >
+            <div className="text-gray-500 text-5xl absolute bottom-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              {item.icon}
+            </div>
+            <h2 className="text-gray-700 font-medium text-lg mb-2">
+              {item.title}
+            </h2>
+            <p className="text-gray-900 font-bold text-2xl">{item.count}</p>
+          </div>
+        ))}
+      </div>
+
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
           <div className="flex flex-wrap items-center">
