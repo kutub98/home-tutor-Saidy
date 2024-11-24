@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Import usePathname hook
 import { Home } from "lucide-react";
 import { FiUsers } from "react-icons/fi";
-
+import { FcDepartment } from "react-icons/fc";
 import { IoAddCircleOutline } from "react-icons/io5";
 const items = [
   { title: "Home", url: "/admin", icon: Home },
   { title: "Tuition", url: "/admin/addTuition", icon: IoAddCircleOutline },
-  { title: "Users", url: "/admin/user", icon: FiUsers }
+  { title: "Users", url: "/admin/user", icon: FiUsers },
+  { title: "Department Service", url: "/admin/service", icon: FcDepartment }
 ];
 
 export function SideBar({
@@ -60,7 +61,7 @@ export function SideBar({
               onClick={handleClick}
               href={item.url}
               className={`flex items-center space-x-4 p-3 rounded-lg transition-colors hover:bg-gray-100 ${
-                pathname === item.url ? "bg-primary text-white" : ""
+                pathname === item.url ? "primaryBg text-white" : ""
               }`}
             >
               <item.icon className="w-5 h-5" />

@@ -2,9 +2,20 @@
 import { SideBar } from "../Components/SideBar/AppSidebar";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import logo from "@/Assets/logo.png";
+import { LiaSignOutAltSolid } from "react-icons/lia";
+import { FaBriefcase } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa6";
+import { FaRegCircleUser } from "react-icons/fa6";
+
+import Image from "next/image";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import ToolTip from "@/lib/Tooltip";
 
 export default function DashBoardLayout({
   children
@@ -22,10 +33,7 @@ export default function DashBoardLayout({
 
       {/* Main Content */}
       <div className=" flex-1  overflow-auto bg-bla ">
-        <div
-          onClick={() => setOpenSideBar(!openSideBar)}
-          className="sticky  top-0 z-[989]  bg-white  flex justify-between p-2 items-center"
-        >
+        <div className="sticky  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
           <Link href="/admin">
             <Image
               src={logo}
@@ -33,17 +41,63 @@ export default function DashBoardLayout({
               alt="Logo"
             />
           </Link>
-          <div className="flex flex-row">
-            <h1 className="mx-1 cursor-pointer">new user</h1>
-            <h1 className="mx-1">Tuition Request</h1>
-            <IoIosArrowDropleft
-              className={`w-7 h-7 cursor-pointer rounded-full primaryBg text-white transform transition-transform duration-300 ${
-                openSideBar ? "rotate-0" : "-rotate-180"
-              }`}
+          <div className="flex flex-row items-center gap-4">
+            <ToolTip
+              toolTipName="User Request"
+              toolTipTrigger={<FaUserPlus className="h-6 w-6 secondaryText" />}
+            />
+            <ToolTip
+              toolTipName="Job Request"
+              toolTipTrigger={<FaBriefcase className="h-6 w-6 secondaryText" />}
+            />
+            <ToolTip
+              toolTipName="User Profile"
+              toolTipTrigger={
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FaRegCircleUser className="w-6 h-6 secondaryText cursor-pointer" />
+                  </PopoverTrigger>
+                  <PopoverContent className="w-72">
+                    <div className="">
+                      <div className="flex flex-row gap-2 items-center border-b-1 pb-2 p-2">
+                        <FaRegCircleUser className="w-7 h-7 secondaryText" />
+                        <div className="">
+                          <h1>{"Amimul Ihsan Saidy"}</h1>
+                          <h1>
+                            {" "}
+                            <span> User Id</span> : 23414
+                          </h1>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2 p-2 border-t-2">
+                        <h1>Profile</h1>
+                        <h1>Settings</h1>
+                        <h1>Update Profile</h1>
+                      </div>
+                      <div className="flex justify-between p-2 border-t-2 cursor-pointer">
+                        <h1>Signout</h1>
+                        <LiaSignOutAltSolid className="w-6 h-6" />
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              }
+            />
+
+            <ToolTip
+              toolTipName="Sidebar"
+              toolTipTrigger={
+                <IoIosArrowDropleft
+                  onClick={() => setOpenSideBar(!openSideBar)}
+                  className={`w-7 h-7 secondaryText cursor-pointer rounded-full  transform transition-transform duration-300 ${
+                    openSideBar ? "rotate-0" : "-rotate-180 "
+                  }`}
+                />
+              }
             />
           </div>
         </div>
-        <div className={`z-[999] ${openSideBar ? "ml-72" : "m0"}`}>
+        <div className={`z-[999] p-4 ${openSideBar ? "ml-72" : "m-0 "}`}>
           {children}
         </div>
       </div>

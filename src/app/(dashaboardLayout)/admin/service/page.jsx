@@ -22,22 +22,22 @@ import {
 } from "@/lib/Country";
 import Link from "next/link";
 
-const AddTuition = () => {
-  const [allJobs, setAllJobs] = useState(null);
+const AddService = () => {
+  const [allServices, setAllServices] = useState(null);
   const [openJob, setOpenJob] = useState(false);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchServices = async () => {
       try {
-        const res = await fetch("/jobs.json");
+        const res = await fetch("/Services.json");
         const data = await res.json();
-        setAllJobs(data);
+        setAllServices(data);
       } catch (err) {
-        console.error("Error fetching jobs:", err);
+        console.log("Error fetching Services:", err);
       }
     };
 
-    fetchJobs();
+    fetchServices();
   }, []);
 
   const handleSubmitForm = (e) => {
@@ -46,7 +46,7 @@ const AddTuition = () => {
   };
   const Loading = () => (
     <div className="flex justify-center items-center py-4">
-      <span>Loading jobs...</span>
+      <span>Loading Services...</span>
     </div>
   );
 
@@ -55,15 +55,17 @@ const AddTuition = () => {
       {/* Top Section */}
       <div className="flex flex-wrap sticky top-16 items-center justify-between bg-white p-4 shadow-lg rounded-lg my-4 gap-4">
         <h1 className="text-lg font-semibold text-gray-800">
-          Total Jobs:{" "}
-          <span className="text-primary font-bold">{allJobs?.length || 0}</span>
+          Total Services:{" "}
+          <span className="text-primary font-bold">
+            {allServices?.length || 0}
+          </span>
         </h1>
 
         <div className="relative flex-1 max-w-xs">
           <Input
             type="search"
             className="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Search jobs..."
+            placeholder="Search Services..."
           />
           <CiSearch
             className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
@@ -75,7 +77,7 @@ const AddTuition = () => {
           onClick={() => setOpenJob(!openJob)}
           className="primaryBg text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
         >
-          {openJob ? "Close Job" : "Add Jobs"}
+          {openJob ? "Close Job" : "Add Services"}
         </Button>
       </div>
 
@@ -141,8 +143,8 @@ const AddTuition = () => {
 
       {/* Job Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-        {allJobs ? (
-          allJobs.map((job, index) => (
+        {allServices ? (
+          allServices.map((job, index) => (
             <div
               key={index}
               className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition"
@@ -215,4 +217,4 @@ const AddTuition = () => {
   );
 };
 
-export default AddTuition;
+export default AddService;

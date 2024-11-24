@@ -77,7 +77,7 @@ const AllUser = () => {
         {/* Add User Button */}
         <Button
           onClick={() => setOpenJob(!openJob)}
-          className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
+          className="primaryBg text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
         >
           {openJob ? "Close User" : "Add User"}
         </Button>
