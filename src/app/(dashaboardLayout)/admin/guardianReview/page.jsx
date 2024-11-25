@@ -9,42 +9,42 @@ import { VscTypeHierarchy } from "react-icons/vsc";
 import { LuBook } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { CiImageOn } from "react-icons/ci";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-
-const AllServices = () => {
-  const [allServices, setAllServices] = useState(null);
+const AllGuardianReview = () => {
+  const [allGuardianReview, setAllGuardianReview] = useState(null);
   const [openJob, setOpenJob] = useState(false);
   const [preview, setPreview] = useState(null);
 
-  // Fetch Services data
+  // Fetch GuardianReview data
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchGuardianReview = async () => {
       try {
-        const res = await fetch("/Services.json");
+        const res = await fetch("/GuardianReview.json");
         const data = await res.json();
-        setAllServices(data);
+        setAllGuardianReview(data);
       } catch (err) {
-        console.log("Error fetching Services:", err);
+        console.log("Error fetching GuardianReview:", err);
       }
     };
-    fetchServices();
+    fetchGuardianReview();
   }, []);
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log("Services added!");
+    console.log("GuardianReview added!");
   };
 
   const Loading = () => (
     <div className="flex justify-center items-center py-4">
-      <span>Loading Services...</span>
+      <span>Loading GuardianReview...</span>
     </div>
   );
 
-  const handleFileChange = (e) => {
+  const handleFileChange = () => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -62,9 +62,9 @@ const AllServices = () => {
       {/* Header Section */}
       <div className="flex flex-wrap sticky top-16 items-center justify-between bg-white p-4 shadow-lg rounded-lg mb-4 gap-4">
         <h1 className="text-lg font-semibold text-gray-800">
-          Total Services:{" "}
+          Total GuardianReviews:{" "}
           <span className="text-primary font-bold">
-            {allServices?.length || 0}
+            {allGuardianReview?.length || 0}
           </span>
         </h1>
 
@@ -73,7 +73,7 @@ const AllServices = () => {
           <Input
             type="search"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Search Services..."
+            placeholder="Search GuardianReviews..."
           />
           <CiSearch
             className="absolute top-1/2 right-3 text-gray-500 transform -translate-y-1/2"
@@ -81,16 +81,16 @@ const AllServices = () => {
           />
         </div>
 
-        {/* Add Services Button */}
+        {/* Add GuardianReview Button */}
         <Button
           onClick={() => setOpenJob(!openJob)}
           className="primaryBg text-white px-4 py-2 rounded-md hover:bg-primary-dark transition"
         >
-          {openJob ? "Close Services" : "Add Services"}
+          {openJob ? "Close GuardianReview" : "Add GuardianReview"}
         </Button>
       </div>
 
-      {/* Add Services Modal */}
+      {/* Add GuardianReview Modal */}
       {openJob && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-[999] flex justify-center items-center overflow-hidden"
@@ -108,7 +108,7 @@ const AllServices = () => {
             </button>
 
             <h2 className="text-lg font-bold text-center mb-4">
-              Add New Services
+              Add New GuardianReview
             </h2>
             <form onSubmit={handleSubmitForm} className="">
               <div className="w-full bg-white rounded-md shadow-xl border p-4 overflow-hidden">
@@ -116,7 +116,7 @@ const AllServices = () => {
                   {/* Full Name Input */}
                   <div className="col-span-12 sm:col-span-6">
                     <Label htmlFor="fullName" className="my-2">
-                      Service Name
+                      Full Name
                     </Label>
                     <Input
                       type="text"
@@ -162,6 +162,33 @@ const AllServices = () => {
                     </Label>
                   </div>
 
+                  {/* Address Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Address" className="my-2">
+                      Address
+                    </Label>
+                    <Input
+                      type="text"
+                      name="Address"
+                      id="Address"
+                      placeholder="Enter Address"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
+                  </div>
+                  {/* Review Input */}
+                  <div className="col-span-12 sm:col-span-6">
+                    <Label htmlFor="Address" className="my-2">
+                      Review
+                    </Label>
+                    <Textarea
+                      name="Address"
+                      id="Address"
+                      placeholder="Write your thought"
+                      required
+                      className="rounded px-2 py-1 border w-full"
+                    />
+                  </div>
                   <div className="col-span-12 mt-3">
                     <div className="flex justify-end gap-4 mt-6">
                       <Button type="submit" className="bg-primary text-white">
@@ -182,10 +209,10 @@ const AllServices = () => {
         </div>
       )}
 
-      {/* Services Listings */}
+      {/* GuardianReview Listings */}
       <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-        {allServices ? (
-          allServices.map((job, index) => (
+        {allGuardianReview ? (
+          allGuardianReview.map((job, index) => (
             <div
               key={index}
               className="bg-gray-50 p-4 rounded-lg shadow-md hover:shadow-lg transition"
@@ -258,4 +285,4 @@ const AllServices = () => {
   );
 };
 
-export default AllServices;
+export default AllGuardianReview;

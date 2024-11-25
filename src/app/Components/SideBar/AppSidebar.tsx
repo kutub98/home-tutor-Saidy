@@ -6,11 +6,19 @@ import { Home } from "lucide-react";
 import { FiUsers } from "react-icons/fi";
 import { FcDepartment } from "react-icons/fc";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { GiTeacher } from "react-icons/gi";
+import { MdOutlineFamilyRestroom } from "react-icons/md";
 const items = [
   { title: "Home", url: "/admin", icon: Home },
   { title: "Tuition", url: "/admin/addTuition", icon: IoAddCircleOutline },
   { title: "Users", url: "/admin/user", icon: FiUsers },
-  { title: "Department Service", url: "/admin/service", icon: FcDepartment }
+  { title: "Department Service", url: "/admin/service", icon: FcDepartment },
+  { title: "Teacher Review", url: "/admin/teacherReview", icon: GiTeacher },
+  {
+    title: "Guardian Review",
+    url: "/admin/guardianReview",
+    icon: MdOutlineFamilyRestroom
+  }
 ];
 
 export function SideBar({
