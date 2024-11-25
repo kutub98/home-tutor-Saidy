@@ -1,6 +1,6 @@
 "use client";
 import { SideBar } from "../Components/SideBar/AppSidebar";
-import { IoIosArrowDropleft } from "react-icons/io";
+import { GoSidebarExpand } from "react-icons/go";
 import { useState } from "react";
 import Link from "next/link";
 import logo from "@/Assets/logo.png";
@@ -87,9 +87,9 @@ export default function DashBoardLayout({
             <ToolTip
               toolTipName="Sidebar"
               toolTipTrigger={
-                <IoIosArrowDropleft
+                <GoSidebarExpand
                   onClick={() => setOpenSideBar(!openSideBar)}
-                  className={`w-7 h-7 primaryText cursor-pointer rounded-full  transform transition-transform duration-300 ${
+                  className={`w-7 h-7 primaryText cursor-pointer transform transition-transform duration-300 ${
                     openSideBar ? "rotate-0" : "-rotate-180 "
                   }`}
                 />

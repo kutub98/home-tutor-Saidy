@@ -10,18 +10,12 @@ import { VscTypeHierarchy } from "react-icons/vsc";
 import { LuBook } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Locations } from "@/lib/Country";
+import { SelectField } from "@/lib/Selection";
 import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
+
+import { Locations } from "@/lib/Country";
 
 const AllUser = () => {
   const [allUser, setAllUser] = useState(null);
@@ -172,43 +166,20 @@ const AllUser = () => {
                     <Label htmlFor="city" className="my-2">
                       City
                     </Label>
-                    <Select>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a City" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {/* <SelectLabel>Fruits</SelectLabel> */}
-                          <SelectItem value="CHATTOGRAM">CHATTOGRAM</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
+
+                    <SelectField options={City} name="studentGender" />
                   </div>
                   {/* Location Input */}
                   <div className="col-span-12 sm:col-span-6">
                     <Label htmlFor="Locations" className="my-2">
                       Locations
                     </Label>
-                    <Select>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a Locations" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {/* <SelectLabel>Fruits</SelectLabel> */}
-                          {Locations.map((value, key) => (
-                            <SelectItem key={key} value={value.value}>
-                              {value.value}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
+                    <SelectField options={Locations} name="studentGender" />
                   </div>
                   {/* Password Input */}
                   <div className="col-span-12 sm:col-span-6">
                     <Label htmlFor="Locations" className="my-2">
-                      Locations
+                      Password
                     </Label>
                     <Input
                       type="password"

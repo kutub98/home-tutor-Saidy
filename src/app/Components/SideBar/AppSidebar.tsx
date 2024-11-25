@@ -49,7 +49,7 @@ export function SideBar({
 
   return (
     <div
-      className={`fixed h-full top-0 left-0 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+      className={`fixed h-full top-0 left-0 bg-white overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out ${
         openSideBar ? "translate-x-0" : "-translate-x-full"
       } z-40`}
     >
