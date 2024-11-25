@@ -25,7 +25,7 @@ export default function DashBoardLayout({
   const [openSideBar, setOpenSideBar] = useState(true);
 
   return (
-    <div className="flex w-full  h-screen z-99  bg-slate-100 overflow-hidden mx-auto">
+    <div className="flex w-full  h-screen z-99  bg-slate-100 !overflow-hidden mx-auto">
       {/* Sidebar */}
       <div className="">
         <SideBar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />
@@ -34,7 +34,7 @@ export default function DashBoardLayout({
       {/* Main Content */}
       <div className=" flex-1  overflow-auto bg-bla ">
         <div className="sticky px-7  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
-          <div className="flex justify-between w-64">
+          <div className="flex justify-between lg:w-64 sm:w-52 w-36">
             <Link href="/admin">
               <Image
                 src={logo}
