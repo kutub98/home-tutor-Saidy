@@ -25,7 +25,7 @@ export default function DashBoardLayout({
   const [openSideBar, setOpenSideBar] = useState(true);
 
   return (
-    <div className="flex h-screen z-99 bg-slate-100 customWidth mx-auto">
+    <div className="flex w-full  h-screen z-99  bg-slate-100 overflow-hidden mx-auto">
       {/* Sidebar */}
       <div className="">
         <SideBar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />
@@ -33,14 +33,27 @@ export default function DashBoardLayout({
 
       {/* Main Content */}
       <div className=" flex-1  overflow-auto bg-bla ">
-        <div className="sticky  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
-          <Link href="/admin">
-            <Image
-              src={logo}
-              className="lg:w-44 w-24 sm:w-32 lg:h-16 h-10"
-              alt="Logo"
+        <div className="sticky px-6  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
+          <div className="flex justify-between w-64">
+            <Link href="/admin">
+              <Image
+                src={logo}
+                className="lg:w-44 w-24 sm:w-32 lg:h-16 h-10"
+                alt="Logo"
+              />
+            </Link>
+            <ToolTip
+              toolTipName="Sidebar"
+              toolTipTrigger={
+                <GoSidebarExpand
+                  onClick={() => setOpenSideBar(!openSideBar)}
+                  className={`w-7 h-7 primaryText cursor-pointer transform transition-transform duration-300 ${
+                    openSideBar ? "rotate-0" : "-rotate-180 "
+                  }`}
+                />
+              }
             />
-          </Link>
+          </div>
           <div className="flex flex-row items-center gap-4">
             <ToolTip
               toolTipName="User Request"
@@ -81,18 +94,6 @@ export default function DashBoardLayout({
                     </div>
                   </PopoverContent>
                 </Popover>
-              }
-            />
-
-            <ToolTip
-              toolTipName="Sidebar"
-              toolTipTrigger={
-                <GoSidebarExpand
-                  onClick={() => setOpenSideBar(!openSideBar)}
-                  className={`w-7 h-7 primaryText cursor-pointer transform transition-transform duration-300 ${
-                    openSideBar ? "rotate-0" : "-rotate-180 "
-                  }`}
-                />
               }
             />
           </div>

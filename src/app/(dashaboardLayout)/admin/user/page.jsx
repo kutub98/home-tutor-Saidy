@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FcMoneyTransfer } from "react-icons/fc";
@@ -15,7 +14,7 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { Locations } from "@/lib/Country";
+import { Locations, City } from "@/lib/Country";
 
 const AllUser = () => {
   const [allUser, setAllUser] = useState(null);
