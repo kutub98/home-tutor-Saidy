@@ -33,7 +33,7 @@ export default function DashBoardLayout({
 
       {/* Main Content */}
       <div className=" flex-1  overflow-auto bg-bla ">
-        <div className="sticky px-6  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
+        <div className="sticky px-7  top-0 z-[989]  bg-white  flex justify-between p-2 items-center">
           <div className="flex justify-between w-64">
             <Link href="/admin">
               <Image
