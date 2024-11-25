@@ -44,23 +44,23 @@ export default function DashBoardLayout({
           <div className="flex flex-row items-center gap-4">
             <ToolTip
               toolTipName="User Request"
-              toolTipTrigger={<FaUserPlus className="h-6 w-6 secondaryText" />}
+              toolTipTrigger={<FaUserPlus className="h-6 w-6 primaryText" />}
             />
             <ToolTip
               toolTipName="Job Request"
-              toolTipTrigger={<FaBriefcase className="h-6 w-6 secondaryText" />}
+              toolTipTrigger={<FaBriefcase className="h-6 w-6 primaryText" />}
             />
             <ToolTip
               toolTipName="User Profile"
               toolTipTrigger={
                 <Popover>
                   <PopoverTrigger asChild>
-                    <FaRegCircleUser className="w-6 h-6 secondaryText cursor-pointer" />
+                    <FaRegCircleUser className="w-6 h-6 primaryText cursor-pointer" />
                   </PopoverTrigger>
                   <PopoverContent className="w-72">
                     <div className="">
                       <div className="flex flex-row gap-2 items-center border-b-1 pb-2 p-2">
-                        <FaRegCircleUser className="w-7 h-7 secondaryText" />
+                        <FaRegCircleUser className="w-7 h-7 primaryText" />
                         <div className="">
                           <h1>{"Amimul Ihsan Saidy"}</h1>
                           <h1>
@@ -89,7 +89,7 @@ export default function DashBoardLayout({
               toolTipTrigger={
                 <IoIosArrowDropleft
                   onClick={() => setOpenSideBar(!openSideBar)}
-                  className={`w-7 h-7 secondaryText cursor-pointer rounded-full  transform transition-transform duration-300 ${
+                  className={`w-7 h-7 primaryText cursor-pointer rounded-full  transform transition-transform duration-300 ${
                     openSideBar ? "rotate-0" : "-rotate-180 "
                   }`}
                 />

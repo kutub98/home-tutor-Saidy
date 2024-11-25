@@ -32,7 +32,9 @@
     "src/app/Components/HowWorkForTutors/HowWorkForTutors.jsx",
     "src/app/(dashaboardLayout)/admin/addTuition/page.jsx",
     "src/app/(dashaboardLayout)/admin/page.jsx",
-, "src/app/(dashaboardLayout)/admin/teacherReview/page.jsx"    "src/app/(dashaboardLayout)/admin/service/page.jsx"
-, "src/app/(dashaboardLayout)/admin/guardianReview/page.jsx"  ],
+    "src/app/(dashaboardLayout)/admin/teacherReview/page.jsx",
+    "src/app/(dashaboardLayout)/admin/service/page.jsx",
+    "src/app/(dashaboardLayout)/admin/guardianReview/page.jsx"
+  ],
   "exclude": ["node_modules"]
 }
