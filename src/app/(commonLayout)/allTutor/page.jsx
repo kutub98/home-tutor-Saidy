@@ -12,7 +12,9 @@ const AllTutor = () => {
   useEffect(() => {
     async function fetchTutors() {
       try {
-        const res = await fetch("http://localhost:5000/api/v1/users/");
+        const res = await fetch(
+          "https://home-tutor-server.vercel.app/api/v1/users"
+        );
         const data = await res.json();
         setAllTutors(data);
       } catch (error) {
